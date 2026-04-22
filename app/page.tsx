@@ -430,6 +430,7 @@ export default function Home() {
               className={`option ${activeBrand === i ? 'active' : ''}`} 
               style={{ "--optionBackground": `url(${brand.bg})` } as any}
               onClick={() => setActiveBrand(i)}
+              aria-label={`View details for ${brand.name}`}
             >
               <div className="shadow"></div>
               <div className="label">

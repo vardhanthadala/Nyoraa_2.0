@@ -19,11 +19,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" style={{ overflowX: "hidden" }}>
+    <html lang="en">
       <head>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
       </head>
-      <body style={{ overflowX: "hidden", width: "100%" }}>{children}</body>
+      <body>{children}</body>
     </html>
   );
 }
