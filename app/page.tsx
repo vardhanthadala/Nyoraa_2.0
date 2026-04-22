@@ -428,7 +428,7 @@ export default function Home() {
             <div 
               key={i}
               className={`option ${activeBrand === i ? 'active' : ''}`} 
-              style={{ "--optionBackground": `url(${brand.bg})` } as any}
+              style={{ "--optionBackground": `url(${brand.bg})` } as React.CSSProperties}
               onClick={() => setActiveBrand(i)}
               aria-label={`View details for ${brand.name}`}
             >
@@ -549,7 +549,7 @@ export default function Home() {
                   "--position": `${-5 + Math.random() * 110}%`,
                   "--time": `${2 + Math.random() * 2}s`,
                   "--delay": `${-1 * (2 + Math.random() * 2)}s`
-                } as any}
+                } as React.CSSProperties}
               ></div>
             ))}
           </div>
