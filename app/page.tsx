@@ -477,7 +477,7 @@ export default function Home() {
               </g>
             </svg>
           </figure>
-          <span class="hover-hint">Hover to slow motion</span>
+          <span className="hover-hint">Hover to slow motion</span>
         </div>
 
         <div className="cards-grid">
