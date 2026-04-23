@@ -290,7 +290,7 @@ export default function Home() {
         <div className="nav-logo">N<span>y</span>oraa</div>
         <ul className="nav-links">
           <li><a href="#">Home</a></li>
-          <li><a href="#spotlight">About Us</a></li>
+          <li><a href="/about-us">About Us</a></li>
           <li><a href="/contacts-us">Contact Us</a></li>
         </ul>
         <button className="nav-btn">Explore</button>

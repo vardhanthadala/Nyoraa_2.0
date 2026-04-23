@@ -102,7 +102,7 @@ export default function ContactUs() {
         <div className="nav-logo">N<span>y</span>oraa</div>
         <ul className="nav-links">
           <li><Link href="/">Home</Link></li>
-          <li><Link href="/#spotlight">About Us</Link></li>
+          <li><Link href="/about-us">About Us</Link></li>
           <li><Link href="/contacts-us">Contact Us</Link></li>
         </ul>
         <button className="nav-btn">Explore</button>
