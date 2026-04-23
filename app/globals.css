@@ -277,22 +277,98 @@ nav {
   width: 100%
 }
 
-.nav-btn {
-  padding: .52rem 1.55rem;
-  border: 1.5px solid var(--gold);
-  background: transparent;
-  color: var(--gold);
-  font-family: var(--fb);
-  font-size: .68rem;
-  letter-spacing: .2em;
-  text-transform: uppercase;
+/* HAMBURGER */
+.hamburger {
+  display: none;
   cursor: pointer;
-  transition: all .25s
+  z-index: 2001; /* Must be higher than nav-links */
+  background: transparent;
+  border: none;
+  padding: 0.5rem;
 }
 
-.nav-btn:hover {
-  background: var(--gold);
-  color: #fff
+.hamburger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--ink);
+  margin: 5px 0;
+  transition: 0.4s;
+}
+
+/* Mobile Menu Styles */
+@media (max-width: 768px) and (min-width: 320px) {
+  .hamburger {
+    display: block;
+  }
+
+  .nav-links {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: var(--bg);
+    display: flex !important; /* Ensure flex is active on mobile */
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2.5rem;
+    transition: transform 0.6s cubic-bezier(0.85, 0, 0.15, 1);
+    z-index: 2000; /* Higher z-index to be above everything */
+    padding: 0;
+    margin: 0;
+    transform: translateX(100%);
+    pointer-events: none;
+    visibility: hidden;
+    list-style: none;
+  }
+
+  .nav-links.active {
+    transform: translateX(0);
+    pointer-events: all;
+    visibility: visible;
+  }
+
+  .nav-links li {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    list-style: none;
+  }
+
+  .nav-links.active li {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .nav-links.active li:nth-child(1) { transition-delay: 0.3s; }
+  .nav-links.active li:nth-child(2) { transition-delay: 0.4s; }
+  .nav-links.active li:nth-child(3) { transition-delay: 0.5s; }
+
+  .nav-links a {
+    font-size: 2rem; /* Even larger for impact */
+    font-family: var(--fd);
+    letter-spacing: 0.25em;
+    color: var(--ink);
+    text-decoration: none;
+    text-transform: uppercase;
+    display: block;
+    padding: 1rem;
+  }
+
+  /* Hamburger Animation */
+  .hamburger.active span:nth-child(1) {
+    transform: rotate(-45deg) translate(-5px, 6px);
+  }
+
+  .hamburger.active span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .hamburger.active span:nth-child(3) {
+    transform: rotate(45deg) translate(-5px, -6px);
+  }
 }
 
 /* SEA SECTIONS & CARDS (Targeting scroll_container) */
@@ -3257,6 +3333,12 @@ hr.div {
   min-height: 100vh;
   column-gap: 3rem;
   padding-block: min(20vh, 3rem);
+}
+
+@media (min-width: 320px) and (max-width: 768px) {
+  .aquatic-section main {
+    padding-top: 8rem !important;
+  }
 }
 
 .aquatic-section .bg {

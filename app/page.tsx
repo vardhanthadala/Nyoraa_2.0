@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+import Link from "next/link";
 
 export default function Home() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -18,6 +19,7 @@ export default function Home() {
 
   const [theme, setTheme] = useState<"dark" | "light">("dark");
   const [activeBrand, setActiveBrand] = useState(0);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -288,12 +290,20 @@ export default function Home() {
 
       <nav>
         <div className="nav-logo">N<span>y</span>oraa</div>
-        <ul className="nav-links">
-          <li><a href="#">Home</a></li>
-          <li><a href="/about-us">About Us</a></li>
-          <li><a href="/contacts-us">Contact Us</a></li>
+        <ul className={`nav-links ${isMenuOpen ? 'active' : ''}`}>
+          <li><Link href="/" onClick={() => setIsMenuOpen(false)}>Home</Link></li>
+          <li><Link href="/about-us" onClick={() => setIsMenuOpen(false)}>About Us</Link></li>
+          <li><Link href="/contacts-us" onClick={() => setIsMenuOpen(false)}>Contact Us</Link></li>
         </ul>
-        <button className="nav-btn">Explore</button>
+        <button 
+          className={`hamburger ${isMenuOpen ? 'active' : ''}`} 
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          aria-label="Toggle menu"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
       </nav>
 
       <div id="hud">
