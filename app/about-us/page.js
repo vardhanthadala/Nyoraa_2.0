@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
@@ -13,6 +13,7 @@ export default function AboutUs() {
     const serifRef = useRef(null);
     const canvasRef = useRef(null);
     const headerRef = useRef(null);
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     useEffect(() => {
         gsap.registerPlugin(ScrollTrigger);
@@ -229,12 +230,20 @@ export default function AboutUs() {
         <div className="about-us-page-wrapper" ref={containerRef}>
             <nav>
                 <div className="nav-logo">N<span>y</span>oraa</div>
-                <ul className="nav-links">
-                    <li><Link href="/">Home</Link></li>
-                    <li><Link href="/about-us">About Us</Link></li>
-                    <li><Link href="/contacts-us">Contact Us</Link></li>
+                <ul className={`nav-links ${isMenuOpen ? 'active' : ''}`}>
+                    <li><Link href="/" onClick={() => setIsMenuOpen(false)}>Home</Link></li>
+                    <li><Link href="/about-us" onClick={() => setIsMenuOpen(false)}>About Us</Link></li>
+                    <li><Link href="/contacts-us" onClick={() => setIsMenuOpen(false)}>Contact Us</Link></li>
                 </ul>
-                <button className="nav-btn">Explore</button>
+                <button 
+                    className={`hamburger ${isMenuOpen ? 'active' : ''}`} 
+                    onClick={() => setIsMenuOpen(!isMenuOpen)}
+                    aria-label="Toggle menu"
+                >
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
             </nav>
 
             {/* ══ SECTION 1 · HERO ══ */}

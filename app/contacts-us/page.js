@@ -10,6 +10,7 @@ export default function ContactUs() {
   const formRef = useRef(null);
   const successRef = useRef(null);
   const particlesRef = useRef(null);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const validate = (formData) => {
     let newErrors = {};
@@ -100,12 +101,20 @@ export default function ContactUs() {
     <div className="contact-us-page-wrapper">
       <nav>
         <div className="nav-logo">N<span>y</span>oraa</div>
-        <ul className="nav-links">
-          <li><Link href="/">Home</Link></li>
-          <li><Link href="/about-us">About Us</Link></li>
-          <li><Link href="/contacts-us">Contact Us</Link></li>
+        <ul className={`nav-links ${isMenuOpen ? 'active' : ''}`}>
+          <li><Link href="/" onClick={() => setIsMenuOpen(false)}>Home</Link></li>
+          <li><Link href="/about-us" onClick={() => setIsMenuOpen(false)}>About Us</Link></li>
+          <li><Link href="/contacts-us" onClick={() => setIsMenuOpen(false)}>Contact Us</Link></li>
         </ul>
-        <button className="nav-btn">Explore</button>
+        <button 
+          className={`hamburger ${isMenuOpen ? 'active' : ''}`} 
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          aria-label="Toggle menu"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
       </nav>
 
       <section className="contact_us">
