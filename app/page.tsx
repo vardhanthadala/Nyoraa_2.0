@@ -51,26 +51,30 @@ export default function Home() {
     gsap.registerPlugin(ScrollTrigger);
 
     const ctx = gsap.context(() => {
-      // CURSOR LOGIC
+      // CURSOR LOGIC optimized with GSAP ticker
       const c = cursorRef.current;
       const cr = cursorRRef.current;
       if (!c || !cr) return;
+
+      const xSet = gsap.quickSetter(c, "x", "px");
+      const ySet = gsap.quickSetter(c, "y", "px");
+      const xrSet = gsap.quickSetter(cr, "x", "px");
+      const yrSet = gsap.quickSetter(cr, "y", "px");
 
       let mx = 0, my = 0, rx = 0, ry = 0;
 
       const handleMouseMove = (e: MouseEvent) => {
         mx = e.clientX; my = e.clientY;
-        c.style.transform = `translate3d(${mx}px, ${my}px, 0)`;
+        xSet(mx); ySet(my);
       };
-      document.addEventListener('mousemove', handleMouseMove);
+      document.addEventListener('mousemove', handleMouseMove, { passive: true });
 
       const animateCursor = () => {
-        rx += (mx - rx) * 0.1;
-        ry += (my - ry) * 0.1;
-        cr.style.transform = `translate3d(${rx}px, ${ry}px, 0)`;
-        requestAnimationFrame(animateCursor);
+        rx += (mx - rx) * 0.15;
+        ry += (my - ry) * 0.15;
+        xrSet(rx); yrSet(ry);
       };
-      requestAnimationFrame(animateCursor);
+      gsap.ticker.add(animateCursor);
 
       // WEBGL LOGIC
       const canvas = canvasRef.current;
@@ -83,7 +87,7 @@ export default function Home() {
 
       const vs = `attribute vec2 a; void main() { gl_Position = vec4(a, 0.0, 1.0); }`;
       const fs = `
-        precision highp float;
+        precision mediump float;
         uniform vec2  uR;
         uniform float uT, uS, uSc, uBl;
         #define PI 3.14159265359
@@ -185,18 +189,19 @@ export default function Home() {
         tgt = Math.min(1, window.scrollY / cinematicRange);
       };
       const resize = () => {
-        const w = window.innerWidth, h = window.innerHeight;
-        canvas.width = w; canvas.height = h; gl.viewport(0, 0, w, h); gl.uniform2f(uR, w, h); update();
+        const dpr = Math.min(window.devicePixelRatio, 1.5); // Performance cap
+        const w = window.innerWidth * dpr, h = window.innerHeight * dpr;
+        canvas.width = w; canvas.height = h;
+        gl.viewport(0, 0, w, h);
+        gl.uniform2f(uR, w, h);
+        update();
       };
       window.addEventListener("resize", resize, { passive: true });
       window.addEventListener("scroll", update, { passive: true });
       resize();
 
       const frame = (now: number) => {
-        if (!isVisible) {
-          requestAnimationFrame(frame);
-          return;
-        }
+        if (!isVisible) return;
 
         smooth += (tgt - smooth) * 0.1;
         const N = 4;
@@ -208,13 +213,13 @@ export default function Home() {
         if (progFillRef.current) progFillRef.current.style.width = (smooth * 100) + '%';
 
         const NAMES = ["AURÉ", "NŪRA", "LUMINA", "VERA"];
-        if (sceneNameRef.current) sceneNameRef.current.textContent = NAMES[Math.min(Math.floor(smooth * N), N - 1)];
-        if (dotsRef.current) Array.from(dotsRef.current.children).forEach((d, i) => (d as HTMLElement).classList.toggle("active", i === Math.min(Math.floor(smooth * N), N - 1)));
+        if (sceneNameRef.current) sceneNameRef.current.textContent = NAMES[si];
+        if (dotsRef.current) Array.from(dotsRef.current.children).forEach((d, i) => (d as HTMLElement).classList.toggle("active", i === si));
 
         gl.uniform1f(uT, now / 1000); gl.uniform1f(uS, smooth); gl.uniform1f(uSc, si); gl.uniform1f(uBl, bl);
-        gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4); requestAnimationFrame(frame);
+        gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4); 
       };
-      requestAnimationFrame(frame);
+      gsap.ticker.add(frame);
 
       // REVEAL & SCRAMBLE
       const scramble = (el: HTMLElement, duration: number = 800) => {
@@ -222,18 +227,25 @@ export default function Home() {
         const chars = final.replace(/\s/g, '');
         const original = el.innerHTML;
         let its = 0;
-        const interval = setInterval(() => {
+        
+        const step = () => {
+          if (!containerRef.current) return; // Stop if component unmounted
+          
           el.innerText = final.split("").map((c, i) => {
             if (i < its) return final[i];
             if (c === ' ' || c === '\n') return c;
             return chars[Math.floor(Math.random() * chars.length)];
           }).join("");
+          
           if (its >= final.length) {
-            clearInterval(interval);
             el.innerHTML = original;
+            return;
           }
+          
           its += final.length / (duration / 30);
-        }, 30);
+          setTimeout(step, 30);
+        };
+        step();
       };
 
       const revealObserver = new IntersectionObserver(es => es.forEach(e => {
@@ -260,12 +272,37 @@ export default function Home() {
         rail.addEventListener('mousemove', onMove);
       }
 
+      // STATS COUNT-UP
+      gsap.utils.toArray<HTMLElement>('.stat-num').forEach(num => {
+        const text = num.innerText;
+        const target = parseInt(text.replace(/[^0-9]/g, ''));
+        const suffix = text.replace(/[0-9]/g, '');
+        const startVal = Math.floor(target * 0.5);
+        
+        gsap.fromTo(num, 
+          { innerHTML: startVal },
+          { 
+            innerHTML: target,
+            duration: 2,
+            ease: "power2.out",
+            snap: { innerHTML: 1 },
+            scrollTrigger: {
+              trigger: ".stats-strip",
+              start: "top 90%",
+            },
+            onUpdate: function() {
+              num.innerHTML = Math.floor(parseFloat(num.innerHTML)) + suffix;
+            }
+          }
+        );
+      });
+
       return () => {
         document.removeEventListener('mousemove', handleMouseMove);
         window.removeEventListener("resize", resize);
         window.removeEventListener("scroll", update);
-        canvasObserver.disconnect();
-        revealObserver.disconnect();
+        gsap.ticker.remove(animateCursor);
+        gsap.ticker.remove(frame);
       };
     }, containerRef);
 

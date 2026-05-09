@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
+import Navbar from '../components/Navbar';
 import { gsap } from 'gsap';
 
 export default function ContactUs() {
@@ -10,7 +11,6 @@ export default function ContactUs() {
   const formRef = useRef<HTMLDivElement>(null);
   const successRef = useRef<HTMLDivElement>(null);
   const particlesRef = useRef<HTMLDivElement>(null);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const validate = (formData: FormData) => {
     let newErrors: { name?: string; email?: string; message?: string } = {};
@@ -37,7 +37,7 @@ export default function ContactUs() {
         y: '50%',
         opacity: Math.random(),
         scale: Math.random() * 2,
-        backgroundColor: Math.random() > 0.5 ? '#1325e8' : '#8f10b7'
+        backgroundColor: Math.random() > 0.5 ? '#333333' : '#888888'
       });
       gsap.to(p, {
         x: (Math.random() - 0.5) * 600,
@@ -99,23 +99,7 @@ export default function ContactUs() {
 
   return (
     <div className="contact-us-page-wrapper">
-      <nav>
-        <div className="nav-logo">N<span>y</span>oraa</div>
-        <ul className={`nav-links ${isMenuOpen ? 'active' : ''}`}>
-          <li><Link href="/" onClick={() => setIsMenuOpen(false)}>Home</Link></li>
-          <li><Link href="/about-us" onClick={() => setIsMenuOpen(false)}>About Us</Link></li>
-          <li><Link href="/contacts-us" onClick={() => setIsMenuOpen(false)}>Contact Us</Link></li>
-        </ul>
-        <button
-          className={`hamburger ${isMenuOpen ? 'active' : ''}`}
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-          aria-label="Toggle menu"
-        >
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-      </nav>
+      <Navbar />
 
       {/* 
       <section className="contact_us">
