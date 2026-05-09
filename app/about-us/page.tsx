@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
+import Navbar from '../components/Navbar';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import 'swiper/css';
@@ -13,7 +14,6 @@ export default function AboutUs() {
     const serifRef = useRef<HTMLDivElement>(null);
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const headerRef = useRef<HTMLDivElement>(null);
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     useEffect(() => {
         gsap.registerPlugin(ScrollTrigger);
@@ -66,188 +66,189 @@ export default function AboutUs() {
 
         initSwiper();
 
-        // Reveal Animations
-        const revEls = document.querySelectorAll('.r, .r-left, .r-right, .r-scale');
-        const revObs = new IntersectionObserver(entries => entries.forEach(e => {
-            if (e.isIntersecting) e.target.classList.add('in');
-        }), { threshold: .1 });
-        revEls.forEach(e => revObs.observe(e));
+        let ctaFrameId: any;
+        let ctaObs: IntersectionObserver | null = null;
+        let draw: () => void;
+        const ctx = gsap.context(() => {
+            // Reveal Animations
+            const revEls = document.querySelectorAll('.r, .r-left, .r-right, .r-scale');
+            const revObs = new IntersectionObserver(entries => entries.forEach(e => {
+                if (e.isIntersecting) e.target.classList.add('in');
+            }), { threshold: .1 });
+            revEls.forEach(e => revObs.observe(e));
 
-        // Word Reveal
-        const wordObs = new IntersectionObserver(entries => entries.forEach(e => {
-            if (e.isIntersecting) {
-                e.target.querySelectorAll('.vwr-word').forEach((w, i) => {
-                    setTimeout(() => w.classList.add('in'), i * 120);
+            // Word Reveal
+            const wordObs = new IntersectionObserver(entries => entries.forEach(e => {
+                if (e.isIntersecting) {
+                    e.target.querySelectorAll('.vwr-word').forEach((w, i) => {
+                        setTimeout(() => w.classList.add('in'), i * 120);
+                    });
+                }
+            }), { threshold: .3 });
+            document.querySelectorAll('.vision-word-reveal').forEach(el => wordObs.observe(el));
+
+            // GSAP Scroll Animations
+            gsap.from('.team-card', {
+                scrollTrigger: { trigger: '#leadership .team-grid', start: 'top 82%' },
+                y: 44, opacity: 0, duration: .75, stagger: .12, ease: 'power3.out', scale: .97
+            });
+            gsap.from('.card', {
+                scrollTrigger: { trigger: '#vision .page-content', start: 'top 82%' },
+                y: 36, opacity: 0, duration: .7, stagger: .12, ease: 'power2.out'
+            });
+            gsap.from('#about-cta .cta-tagline', {
+                scrollTrigger: { trigger: '#about-cta', start: 'top 70%' },
+                y: 40, opacity: 0, duration: 1, ease: 'power3.out'
+            });
+
+            // -- CTA 3 FLOWING LINES --
+            const canvas = canvasRef.current;
+            if (canvas && canvas.parentElement) {
+                const el = canvas.parentElement;
+                const W = el.offsetWidth, H = el.offsetHeight;
+                canvas.width = W; canvas.height = H;
+                const canvasCtx = canvas.getContext('2d');
+                if (canvasCtx) {
+                    const lines = Array.from({ length: 18 }, (_, i) => ({
+                        y: (i / 17) * H,
+                        amp: 8 + Math.random() * 20,
+                        freq: 0.005 + Math.random() * 0.01,
+                        phase: Math.random() * Math.PI * 2,
+                        speed: 0.008 + Math.random() * 0.01
+                    }));
+                    let t = 0;
+                    let isCanvasVisible = true;
+                    ctaObs = new IntersectionObserver(([entry]) => {
+                        isCanvasVisible = entry.isIntersecting;
+                    }, { threshold: 0.01 });
+                    ctaObs.observe(canvas);
+
+                    draw = () => {
+                        if (!isCanvasVisible) return;
+                        t += 1;
+                        canvasCtx.clearRect(0, 0, W, H);
+                        lines.forEach((l, i) => {
+                            canvasCtx.beginPath();
+                            canvasCtx.moveTo(0, l.y);
+                            for (let x = 0; x <= W; x += 2) {
+                                const y = l.y + Math.sin(x * l.freq + t * l.speed + l.phase) * l.amp;
+                                canvasCtx.lineTo(x, y);
+                            }
+                            canvasCtx.strokeStyle = `rgba(184, 146, 74, ${0.05 + i * 0.008})`;
+                            canvasCtx.lineWidth = 1;
+                            canvasCtx.stroke();
+                        });
+                    };
+                    gsap.ticker.add(draw);
+                }
+
+                gsap.to('#h3', {
+                    scrollTrigger: { trigger: '#cta3', start: 'top 75%' },
+                    opacity: 1, y: 0, duration: 1.2, ease: 'power3.out'
+                });
+                gsap.to('#p3', {
+                    scrollTrigger: { trigger: '#cta3', start: 'top 75%' },
+                    opacity: 1, duration: 1, delay: 0.6
+                });
+                gsap.to('#b3', {
+                    scrollTrigger: { trigger: '#cta3', start: 'top 75%' },
+                    opacity: 1, duration: 1, delay: 1.0
                 });
             }
-        }), { threshold: .3 });
-        document.querySelectorAll('.vision-word-reveal').forEach(el => wordObs.observe(el));
 
-        // GSAP
-        gsap.from('.team-card', {
-            scrollTrigger: { trigger: '#leadership .team-grid', start: 'top 82%' },
-            y: 44, opacity: 0, duration: .75, stagger: .12, ease: 'power3.out', scale: .97
-        });
-        gsap.from('.card', {
-            scrollTrigger: { trigger: '#vision .page-content', start: 'top 82%' },
-            y: 36, opacity: 0, duration: .7, stagger: .12, ease: 'power2.out'
-        });
-        gsap.from('#about-cta .cta-tagline', {
-            scrollTrigger: { trigger: '#about-cta', start: 'top 70%' },
-            y: 40, opacity: 0, duration: 1, ease: 'power3.out'
-        });
-
-        // -- CTA 3 FLOWING LINES --
-        let ctaFrameId: any;
-        const canvas = canvasRef.current;
-        if (canvas && canvas.parentElement) {
-            const el = canvas.parentElement;
-            const W = el.offsetWidth, H = el.offsetHeight;
-            canvas.width = W; canvas.height = H;
-            const ctx = canvas.getContext('2d');
-            if (!ctx) return;
-            const lines = Array.from({ length: 18 }, (_, i) => ({
-                y: (i / 17) * H,
-                amp: 8 + Math.random() * 20,
-                freq: 0.005 + Math.random() * 0.01,
-                phase: Math.random() * Math.PI * 2,
-                speed: 0.008 + Math.random() * 0.01
-            }));
-            let t = 0;
-            const draw = () => {
-                ctaFrameId = requestAnimationFrame(draw); t += 1;
-                ctx.clearRect(0, 0, W, H);
-                lines.forEach((l, i) => {
-                    ctx.beginPath();
-                    ctx.moveTo(0, l.y);
-                    for (let x = 0; x <= W; x += 2) {
-                        const y = l.y + Math.sin(x * l.freq + t * l.speed + l.phase) * l.amp;
-                        ctx.lineTo(x, y);
-                    }
-                    ctx.strokeStyle = `rgba(184, 146, 74, ${0.05 + i * 0.008})`;
-                    ctx.lineWidth = 1;
-                    ctx.stroke();
+            // HEADER WRAPPING LOGIC
+            if (serifRef.current) {
+                const el = serifRef.current;
+                const text = el.textContent || "";
+                el.textContent = "";
+                text.split(" ").forEach((word, i) => {
+                    const mask = document.createElement("span");
+                    mask.className = "word-mask";
+                    const inner = document.createElement("span");
+                    inner.className = "word-inner";
+                    inner.textContent = word;
+                    mask.appendChild(inner);
+                    el.appendChild(mask);
+                    if (i < text.split(" ").length - 1) el.appendChild(document.createTextNode(" "));
                 });
-            };
-            draw();
+            }
 
-            gsap.to('#h3', {
-                scrollTrigger: { trigger: '#cta3', start: 'top 75%' },
-                opacity: 1, y: 0, duration: 1.2, ease: 'power3.out'
+            if (italicRef.current) {
+                const el = italicRef.current;
+                const text = el.textContent || "";
+                el.textContent = "";
+                [...text].forEach((ch, i) => {
+                    if (ch === " ") {
+                        el.appendChild(document.createTextNode(" "));
+                        return;
+                    }
+                    const span = document.createElement("span");
+                    span.className = "char";
+                    span.style.animationDelay = `${0.62 + i * 0.055}s`;
+                    span.textContent = ch;
+                    el.appendChild(span);
+                });
+            }
+
+            const headerObs = new IntersectionObserver(([entry]) => {
+                if (entry.isIntersecting) entry.target.classList.add('in');
+            }, { threshold: 0.2 });
+            if (headerRef.current) headerObs.observe(headerRef.current);
+
+            // PARTICLE GENERATION & CARD REVEAL
+            const cards = document.querySelectorAll('.founder-card');
+            cards.forEach(card => {
+                const particlesContainer = card.querySelector('.particles');
+                if (particlesContainer) {
+                    for (let i = 0; i < 8; i++) {
+                        const dot = document.createElement('div');
+                        dot.className = 'p-dot';
+                        const size = 2 + Math.random() * 3;
+                        dot.style.cssText = `
+                            left: ${10 + Math.random() * 80}%;
+                            bottom: ${Math.random() * 20}%;
+                            --dur: ${3 + Math.random() * 3}s;
+                            --delay: ${Math.random() * 3}s;
+                            width: ${size}px;
+                            height: ${size}px;
+                        `;
+                        particlesContainer.appendChild(dot);
+                    }
+                }
             });
-            gsap.to('#p3', {
-                scrollTrigger: { trigger: '#cta3', start: 'top 75%' },
-                opacity: 1, duration: 1, delay: 0.6
-            });
-            gsap.to('#b3', {
-                scrollTrigger: { trigger: '#cta3', start: 'top 75%' },
-                opacity: 1, duration: 1, delay: 1.0
-            });
-        }
+
+            const cardObs = new IntersectionObserver(entries => {
+                entries.forEach(e => {
+                    if (e.isIntersecting) e.target.classList.add('in');
+                });
+            }, { threshold: 0.1 });
+            cards.forEach(c => cardObs.observe(c));
+
+            // Refresh ScrollTrigger after a slight delay to ensure all DOM is ready
+            setTimeout(() => {
+                ScrollTrigger.refresh();
+            }, 100);
+
+            // Cleanup for all observers within ctx
+            return () => {
+                revObs.disconnect();
+                wordObs.disconnect();
+                headerObs.disconnect();
+                cardObs.disconnect();
+                if (ctaObs) ctaObs.disconnect();
+                if (draw) gsap.ticker.remove(draw);
+            };
+        });
 
         return () => {
             if (swiperInstance) swiperInstance.destroy();
-            ScrollTrigger.getAll().forEach(t => t.kill());
-            if (ctaFrameId) cancelAnimationFrame(ctaFrameId);
-        };
-    }, []);
-
-    useEffect(() => {
-        // -- HEADER WRAPPING LOGIC --
-        if (serifRef.current) {
-            const el = serifRef.current;
-            const text = el.textContent || "";
-            el.textContent = "";
-            text.split(" ").forEach((word, i) => {
-                const mask = document.createElement("span");
-                mask.className = "word-mask";
-                const inner = document.createElement("span");
-                inner.className = "word-inner";
-                inner.textContent = word;
-                mask.appendChild(inner);
-                el.appendChild(mask);
-                if (i < text.split(" ").length - 1) el.appendChild(document.createTextNode(" "));
-            });
-        }
-
-        if (italicRef.current) {
-            const el = italicRef.current;
-            const text = el.textContent || "";
-            el.textContent = "";
-            [...text].forEach((ch, i) => {
-                if (ch === " ") {
-                    el.appendChild(document.createTextNode(" "));
-                    return;
-                }
-                const span = document.createElement("span");
-                span.className = "char";
-                span.style.animationDelay = `${0.62 + i * 0.055}s`;
-                span.textContent = ch;
-                el.appendChild(span);
-            });
-        }
-
-        // -- INTERSECTION OBSERVERS --
-        const headerObs = new IntersectionObserver(([entry]) => {
-            if (entry.isIntersecting) entry.target.classList.add('in');
-        }, { threshold: 0.2 });
-        if (headerRef.current) headerObs.observe(headerRef.current);
-
-        // -- PARTICLE GENERATION --
-        const cards = document.querySelectorAll('.founder-card');
-        cards.forEach(card => {
-            const particlesContainer = card.querySelector('.particles');
-            if (particlesContainer) {
-                for (let i = 0; i < 8; i++) {
-                    const dot = document.createElement('div');
-                    dot.className = 'p-dot';
-                    const size = 2 + Math.random() * 3;
-                    dot.style.cssText = `
-                        left: ${10 + Math.random() * 80}%;
-                        bottom: ${Math.random() * 20}%;
-                        --dur: ${3 + Math.random() * 3}s;
-                        --delay: ${Math.random() * 3}s;
-                        width: ${size}px;
-                        height: ${size}px;
-                    `;
-                    particlesContainer.appendChild(dot);
-                }
-            }
-        });
-
-        // Intersection Observer for card entry
-        const cardObs = new IntersectionObserver(entries => {
-            entries.forEach(e => {
-                if (e.isIntersecting) e.target.classList.add('in');
-            });
-        }, { threshold: 0.1 });
-        cards.forEach(c => cardObs.observe(c));
-
-        return () => {
-            cardObs.disconnect();
-            headerObs.disconnect();
+            ctx.revert();
         };
     }, []);
 
     return (
         <div className="about-us-page-wrapper" ref={containerRef}>
-            <nav>
-                <div className="nav-logo">N<span>y</span>oraa</div>
-                <ul className={`nav-links ${isMenuOpen ? 'active' : ''}`}>
-                    <li><Link href="/" onClick={() => setIsMenuOpen(false)}>Home</Link></li>
-                    <li><Link href="/about-us" onClick={() => setIsMenuOpen(false)}>About Us</Link></li>
-                    <li><Link href="/contacts-us" onClick={() => setIsMenuOpen(false)}>Contact Us</Link></li>
-                </ul>
-                <button
-                    className={`hamburger ${isMenuOpen ? 'active' : ''}`}
-                    onClick={() => setIsMenuOpen(!isMenuOpen)}
-                    aria-label="Toggle menu"
-                >
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
-            </nav>
+            <Navbar />
 
             {/* ══ SECTION 1 · HERO ══ */}
             <section id="about-hero" className="aquatic-section">
