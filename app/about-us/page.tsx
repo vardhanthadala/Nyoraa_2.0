@@ -8,18 +8,18 @@ import 'swiper/css/effect-coverflow';
 import 'swiper/css/pagination';
 
 export default function AboutUs() {
-    const containerRef = useRef(null);
-    const italicRef = useRef(null);
-    const serifRef = useRef(null);
-    const canvasRef = useRef(null);
-    const headerRef = useRef(null);
+    const containerRef = useRef<HTMLDivElement>(null);
+    const italicRef = useRef<HTMLDivElement>(null);
+    const serifRef = useRef<HTMLDivElement>(null);
+    const canvasRef = useRef<HTMLCanvasElement>(null);
+    const headerRef = useRef<HTMLDivElement>(null);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     useEffect(() => {
         gsap.registerPlugin(ScrollTrigger);
 
         // -- AQUATIC SWIPER INITIALIZATION --
-        let swiperInstance;
+        let swiperInstance: any;
         const initSwiper = async () => {
             const { default: Swiper } = await import('swiper');
             const { EffectCoverflow, Pagination, Keyboard, Mousewheel } = await import('swiper/modules');
@@ -98,13 +98,14 @@ export default function AboutUs() {
         });
 
         // -- CTA 3 FLOWING LINES --
-        let ctaFrameId;
+        let ctaFrameId: any;
         const canvas = canvasRef.current;
-        if (canvas) {
+        if (canvas && canvas.parentElement) {
             const el = canvas.parentElement;
             const W = el.offsetWidth, H = el.offsetHeight;
             canvas.width = W; canvas.height = H;
             const ctx = canvas.getContext('2d');
+            if (!ctx) return;
             const lines = Array.from({ length: 18 }, (_, i) => ({
                 y: (i / 17) * H,
                 amp: 8 + Math.random() * 20,
@@ -154,8 +155,9 @@ export default function AboutUs() {
     useEffect(() => {
         // -- HEADER WRAPPING LOGIC --
         if (serifRef.current) {
-            const text = serifRef.current.textContent;
-            serifRef.current.textContent = "";
+            const el = serifRef.current;
+            const text = el.textContent || "";
+            el.textContent = "";
             text.split(" ").forEach((word, i) => {
                 const mask = document.createElement("span");
                 mask.className = "word-mask";
@@ -163,24 +165,25 @@ export default function AboutUs() {
                 inner.className = "word-inner";
                 inner.textContent = word;
                 mask.appendChild(inner);
-                serifRef.current.appendChild(mask);
-                if (i < text.split(" ").length - 1) serifRef.current.appendChild(document.createTextNode(" "));
+                el.appendChild(mask);
+                if (i < text.split(" ").length - 1) el.appendChild(document.createTextNode(" "));
             });
         }
 
         if (italicRef.current) {
-            const text = italicRef.current.textContent;
-            italicRef.current.textContent = "";
+            const el = italicRef.current;
+            const text = el.textContent || "";
+            el.textContent = "";
             [...text].forEach((ch, i) => {
                 if (ch === " ") {
-                    italicRef.current.appendChild(document.createTextNode(" "));
+                    el.appendChild(document.createTextNode(" "));
                     return;
                 }
                 const span = document.createElement("span");
                 span.className = "char";
                 span.style.animationDelay = `${0.62 + i * 0.055}s`;
                 span.textContent = ch;
-                italicRef.current.appendChild(span);
+                el.appendChild(span);
             });
         }
 
@@ -235,8 +238,8 @@ export default function AboutUs() {
                     <li><Link href="/about-us" onClick={() => setIsMenuOpen(false)}>About Us</Link></li>
                     <li><Link href="/contacts-us" onClick={() => setIsMenuOpen(false)}>Contact Us</Link></li>
                 </ul>
-                <button 
-                    className={`hamburger ${isMenuOpen ? 'active' : ''}`} 
+                <button
+                    className={`hamburger ${isMenuOpen ? 'active' : ''}`}
                     onClick={() => setIsMenuOpen(!isMenuOpen)}
                     aria-label="Toggle menu"
                 >
@@ -260,35 +263,35 @@ export default function AboutUs() {
                         <div className="swiper-wrapper">
                             <div className="swiper-slide swiper-slide--one">
                                 <div>
-                                    <h2>Jellyfish</h2>
+                                    <h3>Jellyfish</h3>
                                     <p>Jellyfish and sea jellies are the informal common names given to the medusa-phase of certain gelatinous members of the subphylum Medusozoa, a major part of the phylum Cnidaria.</p>
                                     <a href="https://en.wikipedia.org/wiki/Jellyfish" target="_blank">explore</a>
                                 </div>
                             </div>
                             <div className="swiper-slide swiper-slide--two">
                                 <div>
-                                    <h2>Seahorse</h2>
+                                    <h3>Seahorse</h3>
                                     <p>Seahorses are mainly found in shallow tropical and temperate salt water throughout the world. They live in sheltered areas such as seagrass beds, estuaries, coral reefs, and mangroves.</p>
                                     <a href="https://en.wikipedia.org/wiki/Seahorse" target="_blank">explore</a>
                                 </div>
                             </div>
                             <div className="swiper-slide swiper-slide--three">
                                 <div>
-                                    <h2>octopus</h2>
+                                    <h3>octopus</h3>
                                     <p>Octopuses inhabit various regions of the ocean, including coral reefs, pelagic waters, and the seabed; some live in the intertidal zone and others at abyssal depths.</p>
                                     <a href="https://en.wikipedia.org/wiki/Octopus" target="_blank">explore</a>
                                 </div>
                             </div>
                             <div className="swiper-slide swiper-slide--four">
                                 <div>
-                                    <h2>Shark</h2>
+                                    <h3>Shark</h3>
                                     <p>Sharks are a group of elasmobranch fish characterized by a cartilaginous skeleton, five to seven gill slits on the sides of the head, and pectoral fins that are not fused to the head.</p>
                                     <a href="https://en.wikipedia.org/wiki/Shark" target="_blank">explore</a>
                                 </div>
                             </div>
                             <div className="swiper-slide swiper-slide--five">
                                 <div>
-                                    <h2>Dolphin</h2>
+                                    <h3>Dolphin</h3>
                                     <p>Dolphins are widespread. Most species prefer the warm waters of the tropic zones, but some, such as the right whale dolphin, prefer colder climates.</p>
                                     <a href="https://en.wikipedia.org/wiki/Dolphin" target="_blank">explore</a>
                                 </div>
@@ -313,35 +316,35 @@ export default function AboutUs() {
                 <div className="vision-inner">
                     <div className="sh-eye r" style={{ justifyContent: 'center' }}>Vision &amp; Mission</div>
                     <div className="vision-word-reveal r d1">
-                        <span className="vwr-line"><span className="vwr-word">Making</span> <span className="vwr-word d1"><em>Honest</em></span></span>
+                        <span className="vwr-line"><span className="vwr-word">Making</span> <span className="vwr-word d1">Honest</span></span>
                         <span className="vwr-line"><span className="vwr-word d2">Beauty</span> <span className="vwr-word d3">Universal</span></span>
                     </div>
                     <p className="sh-p r d3" style={{ maxWidth: '600px', margin: '0 auto 4rem', textAlign: 'center' }}>We exist to democratise effective, transparent personal care — where every formulation earns its place through clinical evidence, not marketing spend.</p>
                     <div className="page-content r d2">
                         <div className="card">
                             <div className="content">
-                                <h2 className="title">Scientific Rigour</h2>
+                                <h3 className="title">Scientific Rigour</h3>
                                 <p className="copy">We replace marketing conjecture with clinical evidence. Every ingredient is selected for its molecular efficacy.</p>
                                 <button className="btn">Our Methodology</button>
                             </div>
                         </div>
                         <div className="card">
                             <div className="content">
-                                <h2 className="title">Full Disclosure</h2>
+                                <h3 className="title">Full Disclosure</h3>
                                 <p className="copy">Transparency is our baseline. We share our concentrations and sources so you never have to guess what's in your bottle.</p>
                                 <button className="btn">View Standards</button>
                             </div>
                         </div>
                         <div className="card">
                             <div className="content">
-                                <h2 className="title">Universal Reach</h2>
+                                <h3 className="title">Universal Reach</h3>
                                 <p className="copy">High-performance beauty shouldn't be a luxury. We bring clinical-grade formulations to a global audience.</p>
                                 <button className="btn">Our Impact</button>
                             </div>
                         </div>
                         <div className="card">
                             <div className="content">
-                                <h2 className="title">Conscious Growth</h2>
+                                <h3 className="title">Conscious Growth</h3>
                                 <p className="copy">We build for the next century, prioritizing renewable sourcing and circular packaging across all our brands.</p>
                                 <button className="btn">Sustainability</button>
                             </div>
@@ -431,7 +434,7 @@ export default function AboutUs() {
             <section id="cta3">
                 <canvas id="c3" ref={canvasRef}></canvas>
                 <div className="cta3-content">
-                    <h2 id="h3">Let's Build the Future of <br /><em>Honest Beauty</em></h2>
+                    <h2 id="h3">Let's Build the Future of <br />Honest Beauty</h2>
                     <p id="p3">Partner with Nyoraa to redefine transparency in skincare.</p>
                     <button className="btn3" id="b3">Get In Touch</button>
                 </div>
@@ -439,21 +442,6 @@ export default function AboutUs() {
 
             <footer>
                 <div className="footer-wrap">
-                    <div className="bubbles">
-                        {Array.from({ length: 128 }).map((_, i) => (
-                            <div
-                                key={i}
-                                className="bubble"
-                                style={{
-                                    "--size": `${2 + Math.random() * 4}rem`,
-                                    "--distance": `${6 + Math.random() * 4}rem`,
-                                    "--position": `${-5 + Math.random() * 110}%`,
-                                    "--time": `${2 + Math.random() * 2}s`,
-                                    "--delay": `${-1 * (2 + Math.random() * 2)}s`
-                                }}
-                            ></div>
-                        ))}
-                    </div>
                     <div className="footer-content">
                         <div className="footer-links">
                             <div className="footer-col">

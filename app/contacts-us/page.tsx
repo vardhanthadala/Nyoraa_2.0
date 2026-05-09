@@ -4,18 +4,18 @@ import Link from 'next/link';
 import { gsap } from 'gsap';
 
 export default function ContactUs() {
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState<{ name?: string | null; email?: string | null; message?: string | null }>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSent, setIsSent] = useState(false);
-  const formRef = useRef(null);
-  const successRef = useRef(null);
-  const particlesRef = useRef(null);
+  const formRef = useRef<HTMLDivElement>(null);
+  const successRef = useRef<HTMLDivElement>(null);
+  const particlesRef = useRef<HTMLDivElement>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const validate = (formData) => {
-    let newErrors = {};
+  const validate = (formData: FormData) => {
+    let newErrors: { name?: string; email?: string; message?: string } = {};
     if (!formData.get('name')) newErrors.name = "A name is required for resonance.";
-    const email = formData.get('email');
+    const email = formData.get('email') as string;
     if (!email) {
       newErrors.email = "Email is essential for connection.";
     } else if (!/\S+@\S+\.\S+/.test(email)) {
@@ -50,11 +50,11 @@ export default function ContactUs() {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const formData = new FormData(e.target);
+    const formData = new FormData(e.currentTarget);
     const validationErrors = validate(formData);
-    
+
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
       return;
@@ -106,8 +106,8 @@ export default function ContactUs() {
           <li><Link href="/about-us" onClick={() => setIsMenuOpen(false)}>About Us</Link></li>
           <li><Link href="/contacts-us" onClick={() => setIsMenuOpen(false)}>Contact Us</Link></li>
         </ul>
-        <button 
-          className={`hamburger ${isMenuOpen ? 'active' : ''}`} 
+        <button
+          className={`hamburger ${isMenuOpen ? 'active' : ''}`}
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           aria-label="Toggle menu"
         >
@@ -117,6 +117,7 @@ export default function ContactUs() {
         </button>
       </nav>
 
+      {/* 
       <section className="contact_us">
         <div className="container">
           <div className="row">
@@ -130,39 +131,39 @@ export default function ContactUs() {
                           <h3>Contact Us</h3>
                           <div className="accent-line"></div>
                         </div>
-                        
+
                         {!isSent ? (
                           <div ref={formRef}>
                             <p className="sub-text">Feel Free to contact us any time. We will get back to you as soon as we can!.</p>
                             <form className="contact_form" onSubmit={handleSubmit} noValidate>
                               <div className="input-wrap">
-                                <input 
-                                  type="text" 
-                                  name="name" 
-                                  className={`form-control form-group ${errors.name ? 'is-invalid' : ''}`} 
-                                  placeholder="Name" 
-                                  onFocus={() => setErrors(prev => ({...prev, name: null}))}
+                                <input
+                                  type="text"
+                                  name="name"
+                                  className={`form-control form-group ${errors.name ? 'is-invalid' : ''}`}
+                                  placeholder="Name"
+                                  onFocus={() => setErrors(prev => ({ ...prev, name: null }))}
                                 />
                                 {errors.name && <div className="cinematic-tooltip">{errors.name}</div>}
                               </div>
 
                               <div className="input-wrap">
-                                <input 
-                                  type="email" 
-                                  name="email" 
-                                  className={`form-control form-group ${errors.email ? 'is-invalid' : ''}`} 
-                                  placeholder="Email" 
-                                  onFocus={() => setErrors(prev => ({...prev, email: null}))}
+                                <input
+                                  type="email"
+                                  name="email"
+                                  className={`form-control form-group ${errors.email ? 'is-invalid' : ''}`}
+                                  placeholder="Email"
+                                  onFocus={() => setErrors(prev => ({ ...prev, email: null }))}
                                 />
                                 {errors.email && <div className="cinematic-tooltip">{errors.email}</div>}
                               </div>
 
                               <div className="input-wrap">
-                                <textarea 
-                                  name="message" 
-                                  className={`form-control form-group ${errors.message ? 'is-invalid' : ''}`} 
+                                <textarea
+                                  name="message"
+                                  className={`form-control form-group ${errors.message ? 'is-invalid' : ''}`}
                                   placeholder="Message"
-                                  onFocus={() => setErrors(prev => ({...prev, message: null}))}
+                                  onFocus={() => setErrors(prev => ({ ...prev, message: null }))}
                                 ></textarea>
                                 {errors.message && <div className="cinematic-tooltip">{errors.message}</div>}
                               </div>
@@ -218,27 +219,57 @@ export default function ContactUs() {
           </div>
         </div>
       </section>
+      */}
 
-      <section className="map_sec">
+      <section className="contact" id="contact">
         <div className="container">
+          <div className="heading text-center">
+            <h2>Contact <span>Us</span></h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor<br />incididunt ut labore et dolore magna aliqua.</p>
+          </div>
           <div className="row">
-            <div className="col-md-10 offset-md-1">
-              <div className="map_inner">
-                <h4>Find Us on Google Map</h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore quo beatae quasi assumenda, expedita aliquam minima tenetur maiores neque incidunt repellat aut voluptas hic dolorem sequi ab porro, quia error.</p>
-                <div className="map_bind">
-                  <iframe 
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d121812.87198754165!2d78.36973347102641!3d17.412153066367527!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb99daeaebd2c7%3A0xae93b78392bafbc2!2sHyderabad%2C%20Telangana!5e0!3m2!1sen!2sin!4v1713852700000!5m2!1sen!2sin" 
-                    width="100%" 
-                    height="450" 
-                    frameBorder="0" 
-                    style={{ border: 0 }} 
-                    allowFullScreen="" 
-                    aria-hidden="false" 
-                    tabIndex="0"
-                  ></iframe>
+            <div className="col-md-5">
+              <div className="title">
+                <h3>Contact detail</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</p>
+              </div>
+              <div className="content">
+                <div className="info">
+                  <i className="fas fa-mobile-alt"></i>
+                  <h4 className="d-inline-block">PHONE :<br />
+                    <span>+12457836913 , +12457836913</span></h4>
+                </div>
+                <div className="info">
+                  <i className="far fa-envelope"></i>
+                  <h4 className="d-inline-block">EMAIL :<br />
+                    <span>example@info.com</span></h4>
+                </div>
+                <div className="info">
+                  <i className="fas fa-map-marker-alt"></i>
+                  <h4 className="d-inline-block">ADDRESS :<br />
+                    <span>6743 last street , Abcd, Xyz</span></h4>
                 </div>
               </div>
+            </div>
+
+            <div className="col-md-7">
+              <form>
+                <div className="row">
+                  <div className="col-sm-6">
+                    <input type="text" className="form-control" placeholder="Name" />
+                  </div>
+                  <div className="col-sm-6">
+                    <input type="email" className="form-control" placeholder="Email" />
+                  </div>
+                  <div className="col-sm-12">
+                    <input type="text" className="form-control" placeholder="Subject" />
+                  </div>
+                </div>
+                <div className="form-group">
+                  <textarea className="form-control" rows={5} id="comment" placeholder="Message"></textarea>
+                </div>
+                <button className="btn btn-block" type="submit">Send Now!</button>
+              </form>
             </div>
           </div>
         </div>
