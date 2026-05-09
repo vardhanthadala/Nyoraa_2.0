@@ -58,8 +58,26 @@
   --nav-x: calc(var(--ui-inset) + 0.125rem);
   --reveal-offset: 0.625rem;
   --reveal-duration: 0.5s;
-  --card-radius: 0.875rem;
-  --z-ui: 10;
+  /* Typography System */
+  --fs-h1: clamp(2.5rem, 8vw, 5.5rem);
+  --fs-h2: clamp(2rem, 5vw, 3.8rem);
+  --fs-h3: clamp(1.4rem, 4vw, 2.2rem);
+  --fs-h4: clamp(1.1rem, 2vw, 1.4rem);
+  --fs-body: clamp(0.95rem, 1.1vw, 1.05rem);
+  --fs-small: 0.85rem;
+  --fs-xs: 0.75rem;
+  --fs-btn: 0.9rem;
+
+  --lh-h1: 0.95;
+  --lh-h2: 1.05;
+  --lh-h3: 1.25;
+  --lh-body: 1.75;
+
+  --fw-bold: 700;
+  --fw-semibold: 600;
+  --fw-medium: 500;
+  --fw-regular: 400;
+  --fw-light: 300;
 }
 
 :root[data-theme="light"] {
@@ -106,42 +124,111 @@ h4 {
 
 h1 {
   font-family: var(--fd);
-  font-size: clamp(2.8rem, 7vw, 6rem);
-  font-weight: 700;
-  line-height: 0.95;
+  font-size: var(--fs-h1);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-h1);
   letter-spacing: -0.01em;
+  text-transform: uppercase;
 }
 
 h2 {
   font-family: var(--fd);
-  font-size: clamp(2rem, 4.5vw, 3.8rem);
-  font-weight: 600;
-  line-height: 1.05;
+  font-size: var(--fs-h2);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-h2);
   letter-spacing: 0.01em;
+  text-transform: uppercase;
 }
 
 h3 {
   font-family: var(--fb);
-  font-size: clamp(1.1rem, 2vw, 1.5rem);
-  font-weight: 500;
-  line-height: 1.25;
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-medium);
+  line-height: var(--lh-h3);
   letter-spacing: 0.02em;
 }
 
 h4 {
   font-family: var(--fb);
-  font-size: clamp(0.85rem, 1.2vw, 1.1rem);
-  font-weight: 500;
-  line-height: 1.35;
+  font-size: var(--fs-h4);
+  font-weight: var(--fw-medium);
+  line-height: var(--lh-h3);
   letter-spacing: 0.03em;
 }
 
 p {
   font-family: var(--fb);
-  font-size: clamp(0.9rem, 1.1vw, 1.05rem);
-  font-weight: 400;
-  line-height: 1.7;
+  font-size: var(--fs-body);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-body);
   color: var(--ink-m);
+}
+
+/* TYPOGRAPHY UTILITIES */
+.tag, .sh-eye, .ls-eyebrow {
+  font-family: var(--fb);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-semibold);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink-s);
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.body-text, .copy, .founder-bio, .sh-p, .ls-subtext {
+  font-family: var(--fb);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  color: var(--ink-m);
+  font-weight: var(--fw-regular);
+}
+
+.cta, .btn {
+  font-family: var(--fb);
+  font-size: var(--fs-btn);
+  font-weight: var(--fw-medium);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  transition: all 0.3s ease;
+}
+
+.stat-num {
+  font-family: var(--fd);
+  font-size: var(--fs-h2);
+  font-weight: var(--fw-semibold);
+  line-height: 1;
+}
+
+.stat-label {
+  font-family: var(--fb);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-medium);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-s);
+}
+
+.founder-name {
+  font-family: var(--fd);
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-semibold);
+  letter-spacing: 0.01em;
+}
+
+.founder-title {
+  font-family: var(--fb);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-medium);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-s);
 }
 
 /* CURSOR (Hidden for now as it might be too much, but user snippet had it) */
@@ -312,7 +399,8 @@ nav.nav-hidden {
 .nav-links a {
   color: #000000;
   text-decoration: none;
-  font-size: 0.9rem;
+  font-size: var(--fs-btn);
+  font-weight: var(--fw-medium);
   letter-spacing: .18em;
   text-transform: uppercase;
   position: relative;
@@ -420,9 +508,10 @@ nav.nav-hidden {
   }
 
   .nav-links a {
-    font-size: 2rem;
-    /* Even larger for impact */
+    font-size: var(--fs-h2);
+    /* Impactful mobile menu */
     font-family: var(--fd);
+    font-weight: var(--fw-semibold);
     letter-spacing: 0.25em;
     color: #000000;
     text-decoration: none;
@@ -523,9 +612,6 @@ nav.nav-hidden {
 }
 
 #scroll_container .tag {
-  font-size: 0.6rem;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
   color: var(--accent-sea);
   margin-block-end: 1.1rem;
   opacity: 0;
@@ -539,10 +625,6 @@ nav.nav-hidden {
 }
 
 #scroll_container :is(h1, h2) {
-  font-family: var(--font-display);
-  font-weight: 700;
-  letter-spacing: 0.03em;
-  line-height: 0.92;
   opacity: 0;
   translate: 0 1.125rem;
   transition: opacity var(--reveal-duration) ease 0.08s, translate var(--reveal-duration) ease 0.08s;
@@ -609,7 +691,7 @@ nav.nav-hidden {
 #scroll_container .h-line {
   width: 3.125rem;
   height: var(--hairline);
-  background: var(--accent-sea);
+  background: #888888;
   margin-block-end: 1.2rem;
   opacity: 0;
   scale: 0 1;
@@ -720,11 +802,11 @@ hr.div {
 
 .sh-h {
   font-family: var(--fd);
-  font-size: clamp(2.3rem, 4.4vw, 4.8rem);
-  font-weight: 600;
-  line-height: 1.05;
+  font-size: var(--fs-h2);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-h2);
   color: var(--ink);
-  margin-bottom: 1.1rem
+  margin-bottom: 1.1rem;
 }
 
 .sh-h em {
@@ -733,10 +815,10 @@ hr.div {
 }
 
 .sh-p {
-  font-size: .84rem;
-  line-height: 1.9;
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
   color: var(--ink-s);
-  max-width: 440px
+  max-width: 440px;
 }
 
 /* STRIPE */
@@ -1661,9 +1743,9 @@ footer {
 
 .why-section .section-title {
   font-family: var(--font-display);
-  font-size: clamp(40px, 6vw, 80px);
-  line-height: 0.9;
-  letter-spacing: 1px;
+  font-size: var(--fs-h2);
+  line-height: var(--lh-h2);
+  letter-spacing: 0.02em;
   color: var(--bg);
 }
 
@@ -1971,8 +2053,9 @@ footer {
 }
 
 .footer-col b {
-  font-family: var(--font-display);
-  font-size: 1.25rem;
+  font-family: var(--fd);
+  font-size: var(--fs-h4);
+  font-weight: var(--fw-semibold);
   color: #000000;
   letter-spacing: 0.05em;
   margin-bottom: 0.5rem;
@@ -1982,7 +2065,7 @@ footer {
 .footer-col a {
   color: var(--ink-m);
   text-decoration: none;
-  font-size: 0.95rem;
+  font-size: var(--fs-body);
   transition: color 0.3s;
 }
 
@@ -2517,7 +2600,7 @@ button.contact_form_submit:hover {
 
 hr.div {
   border: none;
-  border-top: 1px solid var(--border);
+  border-top: 1px solid #dddddd;
   margin: 0 5vw;
 }
 
@@ -2987,11 +3070,12 @@ hr.div {
 
 .vision-word-reveal {
   font-family: var(--fd);
-  font-size: clamp(2.2rem, 5vw, 4.8rem);
-  font-weight: 700;
-  line-height: 1.1;
+  font-size: var(--fs-h2);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-h2);
   color: var(--ink);
   margin: 2rem 0;
+  text-align: center;
 }
 
 .vision-word-reveal em {
@@ -3463,8 +3547,9 @@ hr.div {
   text-transform: uppercase;
   letter-spacing: 2px;
   font-family: var(--fd);
-  font-weight: 700;
-  font-size: clamp(3rem, 6vw, 4.8rem);
+  font-weight: var(--fw-semibold);
+  font-size: var(--fs-h2);
+  line-height: var(--lh-h2);
   background: linear-gradient(45deg,
       #0f0f0f 0%,
       #3a2f1d 25%,
@@ -3494,7 +3579,7 @@ hr.div {
 
 .aquatic-content hr {
   display: block;
-  background: #005baa;
+  background: #888888;
   height: 0.25rem;
   width: 6.25rem;
   border: none;
@@ -3784,20 +3869,18 @@ hr.div {
 }
 
 #vision .title {
-  font-size: 1.3rem;
-  font-weight: 600;
-  line-height: 1.2;
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-h3);
   color: white;
-  font-family: var(--fb);
   margin: 0;
 }
 
 #vision .copy {
-  font-family: var(--fd);
-  font-weight: 400;
-  font-size: 1.125rem;
-  font-style: italic;
-  line-height: 1.35;
+  font-family: var(--fb);
+  font-weight: var(--fw-regular);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
   color: whitesmoke;
 }
 
@@ -3805,14 +3888,16 @@ hr.div {
   cursor: pointer;
   margin-top: 1.5rem;
   padding: 0.75rem 1.5rem;
-  font-size: 0.65rem;
-  font-weight: 500;
-  letter-spacing: 0.025rem;
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-medium);
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: white;
-  background-color: black;
-  border: none;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: transparent;
+  transition: all 0.3s ease;
 }
+
 
 #vision .btn:hover {
   background-color: #1a1a1a;
@@ -3896,30 +3981,27 @@ hr.div {
 
 .ls-headline-serif {
   font-family: var(--fd);
-  font-size: clamp(2.2rem, 5vw, 4.8rem);
-  line-height: 1.05;
+  font-size: var(--fs-h2);
+  line-height: var(--lh-h2);
   margin: 0 0 6px;
   color: #000000;
-  font-weight: 600;
+  font-weight: var(--fw-semibold);
 }
 
 .ls-headline-italic {
   font-family: var(--fd);
   font-style: italic;
-  font-size: clamp(2.2rem, 5vw, 4.8rem);
-  line-height: 1.1;
+  font-size: var(--fs-h2);
+  line-height: var(--lh-h2);
   margin: 0 0 22px;
   color: #FFE4C4;
-  font-weight: 400;
+  font-weight: var(--fw-regular);
 }
 
 .ls-subtext {
-  font-size: 14px;
   color: #888888;
-  line-height: 1.75;
   max-width: 440px;
   margin: 0 auto;
-  font-weight: 400;
 }
 
 .founder-stage {
@@ -4138,9 +4220,6 @@ hr.div {
 }
 
 .founder-name {
-  font-family: var(--fd);
-  font-size: 26px;
-  font-weight: 600;
   color: #000000;
   margin: 0 0 3px;
   transition: color 0.4s ease 0.1s;
@@ -4151,11 +4230,7 @@ hr.div {
 }
 
 .founder-title {
-  font-size: 11px;
-  letter-spacing: 0.18em;
   color: #777777;
-  text-transform: uppercase;
-  font-weight: 500;
   margin: 0 0 14px;
   transition: color 0.4s ease 0.1s;
 }
@@ -4166,7 +4241,7 @@ hr.div {
 
 .divider-line {
   height: 1px;
-  background: var(--border);
+  background: #dddddd;
   margin-bottom: 14px;
   transition: background 0.4s ease;
 }
@@ -4333,15 +4408,14 @@ hr.div {
 
 .cta3-content h2 {
   font-family: var(--fd);
-  font-size: clamp(32px, 6vw, 64px);
-  /* Larger, more cinematic */
+  font-size: var(--fs-h2);
+  line-height: var(--lh-h2);
+  font-weight: var(--fw-semibold);
   color: var(--bg-warm);
   text-align: center;
   opacity: 0;
   transform: translateY(30px);
   max-width: 900px;
-  line-height: 1.05;
-  font-weight: 600;
 }
 
 .cta3-content h2 em {
