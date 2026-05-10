@@ -39,12 +39,12 @@
   --surface-alt: #f2ede5;
   --border: #e8e0d4;
   --border-s: #f0ebe3;
-  --gold: #F5F5DC;
+  --gold: white;
   --gold-l: #FAF9F6;
   --gold-p: #FFFDD0;
   --sage: #7a9e7e;
   --blush: #e8c8b8;
-  --ink: #5f4d4d;
+  --ink: grey;
   --ink-m: #4a3828;
   --ink-s: #8a7a6a;
   --ink-xs: #b8a898;
@@ -1757,12 +1757,11 @@ footer {
   font-size: var(--fs-h2);
   line-height: var(--lh-h2);
   letter-spacing: 0.02em;
-  color: var(--ink);
+  color: black;
 }
 
 .why-section .section-title span {
-  color: #a8884d;
-  /* Darker gold for light bg */
+  color: black;
 }
 
 .why-section .header-right {
@@ -1837,7 +1836,7 @@ footer {
 }
 
 .usp-card {
-  background: #FAFAFA;
+  background: #EDEDED;
   padding: 48px 36px;
   position: relative;
   overflow: hidden;
@@ -1856,7 +1855,7 @@ footer {
 }
 
 .usp-card:hover {
-  background: #F0F0F0;
+  background: #E2E2E2;
 }
 
 .usp-card:hover::after {
@@ -1866,14 +1865,14 @@ footer {
 .card-num {
   font-family: var(--font-display);
   font-size: 56px;
-  color: rgba(184, 146, 74, 0.15);
+  color: #cccccc;
   line-height: 1;
   margin-bottom: 24px;
   transition: color 0.3s;
 }
 
 .usp-card:hover .card-num {
-  color: rgba(184, 146, 74, 0.3);
+  color: #999999;
 }
 
 .card-icon {
@@ -1886,14 +1885,14 @@ footer {
   font-family: var(--font-display);
   font-size: 24px;
   letter-spacing: 0.5px;
-  color: var(--ink);
+  color: black;
   margin-bottom: 12px;
 }
 
 .card-desc {
   font-size: 14px;
   line-height: 1.7;
-  color: var(--ink-xs);
+  color: grey;
 }
 
 .stats-strip {
@@ -1919,11 +1918,23 @@ footer {
   border-right: none;
 }
 
+@keyframes darkMetallicShine {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
 .stat-num {
   font-family: var(--font-display);
   font-size: 56px;
-  color: var(--ink);
   line-height: 1;
+  background: linear-gradient(110deg, #111111 40%, #777777 50%, #111111 60%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  animation: darkMetallicShine 5s linear infinite;
+  filter: drop-shadow(0px 4px 6px rgba(0, 0, 0, 0.15));
 }
 
 .stat-lbl {
