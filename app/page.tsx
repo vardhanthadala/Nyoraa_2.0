@@ -7,6 +7,47 @@ import Link from "next/link";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 
+const CountUp = ({ end, duration = 1.2 }: { end: number, duration?: number }) => {
+  const start = Math.floor(end / 2);
+  const [count, setCount] = useState(start);
+  const ref = useRef<HTMLSpanElement>(null);
+
+  useEffect(() => {
+    let observer: IntersectionObserver;
+    if (ref.current) {
+      // Trigger when the element crosses slightly into the viewport
+      observer = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+          let startTimestamp: number | null = null;
+          const durationMs = duration * 1000;
+
+          const step = (timestamp: number) => {
+            if (!startTimestamp) startTimestamp = timestamp;
+            const progress = Math.min((timestamp - startTimestamp) / durationMs, 1);
+
+            // Smoother easeOut (equivalent to power2.out)
+            const easeOut = 1 - Math.pow(1 - progress, 2);
+            setCount(Math.floor(easeOut * (end - start) + start));
+
+            if (progress < 1) {
+              window.requestAnimationFrame(step);
+            } else {
+              setCount(end);
+            }
+          };
+          window.requestAnimationFrame(step);
+          observer.disconnect();
+        }
+      }, { threshold: 0.5 }); // Ensures it is highly visible before starting
+
+      observer.observe(ref.current);
+    }
+    return () => observer?.disconnect();
+  }, [end, duration, start]);
+
+  return <span ref={ref} className="font-normal">{count}</span>;
+};
+
 export default function Home() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const progFillRef = useRef<HTMLDivElement>(null);
@@ -457,74 +498,269 @@ export default function Home() {
         <hr className="div" />
       </div>
 
-      <section className="why-section reveal">
-        <div className="section-header">
-          <div className="header-left">
-            <p className="eyebrow">Our promise</p>
-            <h2 className="section-title">The Nyoraa<br /><span>Standards</span></h2>
+      <section className="
+        w-full font-raleway bg-white
+        px-5   py-14
+        xs:px-7  xs:py-16
+        sm:px-10 sm:py-20
+        md:px-16 md:py-24
+        lg:px-24 lg:py-28
+        xl:px-32 xl:py-32
+        2xl:px-44 2xl:py-40
+        3xl:px-64 3xl:py-52
+        4xl:px-96 4xl:py-64
+      ">
+
+        {/* ── HEADER ─────────────────────────────── */}
+        <div className="
+          flex flex-col gap-5
+          sm:flex-row sm:items-end sm:justify-between
+          mb-7 sm:mb-9 lg:mb-11 2xl:mb-14 3xl:mb-18 4xl:mb-24
+        ">
+
+          {/* Left */}
+          <div className="shrink-0 reveal" style={{ transitionDelay: '0.1s' }}>
+            <p className="
+              flex items-center gap-2.5 uppercase tracking-[0.2em] font-medium text-linen-500
+              text-[10px] sm:text-[10.5px] 2xl:text-xs 3xl:text-sm 4xl:text-base
+              mb-3 sm:mb-4 2xl:mb-5 3xl:mb-6
+            ">
+              <span className="h-px bg-linen-400 shrink-0 w-5 2xl:w-7 3xl:w-9 4xl:w-12"></span>
+              Our Promise
+            </p>
+
+            <h2 className="
+              leading-[1.04] tracking-tight
+              text-[30px]
+              xs:text-[34px]
+              sm:text-[38px]
+              md:text-[44px]
+              lg:text-[50px]
+              xl:text-[56px]
+              2xl:text-[68px]
+              3xl:text-[88px]
+              4xl:text-[108px]
+            ">
+              <span className="block font-light   text-linen-900">The Nyoraa</span>
+              <span className="block font-semibold text-linen-900">Standards</span>
+            </h2>
           </div>
-          <p className="header-right">
+
+          {/* Right: description */}
+          <p className="reveal
+            text-linen-600 font-normal leading-[1.75]
+            sm:text-right
+            text-[12px]
+            xs:text-[12.5px]
+            sm:text-[12.5px] sm:max-w-[210px]
+            md:text-[13px]   md:max-w-[230px]
+            lg:text-[13.5px] lg:max-w-[250px]
+            xl:max-w-[270px]
+            2xl:text-[16px]  2xl:max-w-[330px]
+            3xl:text-[20px]  3xl:max-w-[420px]
+            4xl:text-[24px]  4xl:max-w-[520px]
+          " style={{ transitionDelay: '0.2s' }}>
             Clinical purity is not a marketing term—it is a molecular mandate. We bridge the gap between raw botanical power and surgical precision.
           </p>
         </div>
 
-        <div className="logo-band" ref={logoBandRef}>
-          <figure>
-            <svg viewBox="0 0 883 105.2" overflow="visible">
-              <g ref={logoPathsRef}>
-                <polygon points="359.9,49.6 359.8,49.7 359.9,49.8 " />
-                <polygon points="28,0 10.8,0 28,9 " /><polygon points="28,12.6 0,46 0,51.9 28,48.9 " /><polygon points="0.8,105 28,105 28,74.7 20.3,69.7 " /><polygon points="28,9 10.8,0 0,0 0,46 28,12.6 " /><polygon points="0,51.9 0,57.3 20,69.8 20,69.8 20,69.8 28,74.7 28,48.9 " /><polygon points="0,57.3 0,105 0.8,105 20.1,69.7 " />
-                <polygon points="89.7,40.6 61,25.9 38,46 38,47.8 91,41.9 " /><polygon points="89.7,40.6 68.4,19.4 61,25.9 " /><polygon points="99,41 126,37.9 126,30.3 99,0 99,0 " /><polygon points="38,47.8 38,47.8 103.1,63.5 98.9,49.8 91,41.9 " /><polygon points="68.4,19.3 49.2,0 38,0 38,14.1 61,25.8 " /><polygon points="38,47.8 38,80.9 66,98.3 66,55.5 115.2,105 115.8,105 103.1,63.4 " /><polygon points="61,25.9 38,14.1 38,46 " /><polygon points="38,105 66,105 66,98.3 38,80.9 " /><polygon points="126,0 99,0 126,30.3 " /><polygon points="99,49.8 102.9,63.5 126,68.7 126,59.4 99,45.3 " /><polygon points="99,41 99,45.3 126,59.4 126,37.9 " /><polygon points="115.8,105 126,105 126,68.7 102.8,63.4 " />
-                <path d="M225.8,74.2l-12.6,24.5c7.5,4.1,16.1,6.5,25.3,6.5c2.2,0,4.3-0.1,6.4-0.4L237,77.7C233,77.5,229.1,76.2,225.8,74.2z" /><path d="M213.8,55.7l-20.8,23c4.8,8.4,11.8,15.4,20.3,20.1l12.6-24.5C219.3,70.3,214.7,63.5,213.8,55.7z" /><path d="M238.5,77.8c-0.5,0-1,0-1.4,0l7.8,27.1c8.7-1,16.7-4.2,23.6-8.9l-14.6-23.3C249.5,75.8,244.3,77.8,238.5,77.8z" /><path d="M251.5,31.3c6.7,4.1,11.3,11.2,11.9,19.4l27.5,1.5c-0.1-12.4-4.6-23.9-12-32.8L251.5,31.3z" /><path d="M263.6,52.7c0,8-3.8,15.2-9.8,19.8l14.6,23.3c13.6-9.4,22.6-25.2,22.6-43c0-0.2,0-0.4,0-0.6l-27.5-1.5C263.5,51.4,263.6,52,263.6,52.7z" /><path d="M227.3,30.3L212.7,7.1c-8.5,4.9-15.6,12.1-20.3,20.8L218.3,38C220.6,34.8,223.7,32.1,227.3,30.3z" /><path d="M213.6,52.7c0-5.5,1.8-10.6,4.7-14.7l-25.9-10.2c-4,7.5-6.3,16-6.3,25c0,9.4,2.5,18.2,6.8,25.8l20.8-23C213.6,54.7,213.6,53.7,213.6,52.7z" /><path d="M238.5,27.7c3.6,0,7,0.8,10.1,2.1l12.5-24.4c-6.8-3.3-14.5-5.1-22.6-5.1c-9.4,0-18.2,2.5-25.8,6.8l14.6,23.3C230.7,28.6,234.5,27.7,238.5,27.7z" /><path d="M251.5,31.3L279,19.4c-4.9-5.9-11-10.7-17.9-14.1l-12.5,24.4C249.6,30.2,250.6,30.7,251.5,31.3z" />
-                <polygon points="387,105 360,50 360,89.1 376.1,105 " /><polygon points="387,29.5 360.8,0 360,0 360,49.6 387,30.8 " /><polygon points="387,0 360.8,0 387,29.5 " /><polygon points="359.9,49.8 359.8,49.7 336.6,65.6 360,89.1 360,50 " /><polygon points="336.1,26 335.6,26.1 330.8,59.8 335.6,26.1 308.8,27.1 335.6,26.1 335.6,25.5 310.2,0 299,0 299,8.2 327,61.4 327,55.5 336.8,65.6 359.9,49.7 " /><polygon points="360,50 360,50 360,50 387,105 387,105 387,30.8 360,49.6 360,49.8 " /><polygon points="299,105 326.1,105 310.9,78.9 326.1,105 327,105 327,69.5 299,86.5 " /><polygon points="299,52.7 299,86.5 327,69.5 327,65.1 299,36.4 " /><polygon points="336.1,26 335.6,25.6 335.6,26.1 " /><polygon points="299,8.2 299,36.4 327,65.1 327,61.4 " />
-                <polygon points="425,36 425,27.8 399.8,0 397,0 397,49.5 397,49.5 " /><polygon points="425,76 397,76 397,105.2 425,80.3 " /><polygon points="432.5,63 438.1,40 425,40 425,36 397.4,49.5 425,66.1 425,63 " /><polygon points="425,66.1 397,49.5 397,49.5 397,76 425,76 " /><polygon points="425,23 444.3,23 437.3,0 399.8,0 425,27.8 " /><polygon points="397.4,49.5 397.4,49.5 397.4,49.5 " /><polygon points="432.5,63 456.7,63 449.5,40 438.1,40 " /><polygon points="463,23 463,0 437.3,0 444.3,23 " /><polygon points="458,63 458,40 449.5,40 456.7,63 " /><polygon points="463,83 425,83 425,80.3 397.4,105 462,105 420.9,83.8 462,105 463,105 " />
-                <path d="M591.6,68.8c8.7-7.1,14.3-17.9,14.3-29.9c0-4.8-0.9-9.3-2.5-13.5l-20.6,13.3L591.6,68.8z" /><path d="M582.8,38.6L582.8,38.6C582.7,38.6,582.7,38.6,582.8,38.6L582.8,38.6z" /><path d="M567.8,77c0.5,0,1.1,0.4,1.6,0.4L564.8,54h-8.7l-13.9,21l8.8,11.1V77H567.8z" /><path d="M556.1,54H551V23h16.6c2.6,0,5.1,0.9,7.3,2.1l12.8-19.2C581.7,2.2,574.7,0,567.2,0h-33.8l27.2,16.7l27-10.7l-27,10.8l0,0l0,0l-37.7,15v17.9L542,75L556.1,54z" /><path d="M582.7,38.9c0,8.4-6.7,15.1-15.1,15.1h-2.9l4.6,23.5c8.4-0.4,16.1-3.6,22.2-8.6L582.7,38.9L582.7,38.9z" /><polygon points="523,103.4 523,105 551,105 551,86.1 542.2,74.8 " /><polygon points="523,49.7 523,103.4 542,74.8 " /><polygon points="533.4,0 523,0 523,31.8 560.7,16.7 " /><path d="M582.7,38.6L582.7,38.6l20.6-13.2c-3-8-8.6-14.8-15.8-19.2l-12.8,19.2C579.6,27.8,582.7,32.8,582.7,38.6z" />
-                <polygon points="609,65.6 609,105 615.3,105 628.8,75.8 615.3,105 637,105 637,96.9 619.9,53.5 " /><polygon points="620.1,53.5 637,96.9 637,59.8 637,34.4 " /><polygon points="637,0 617.8,0 637,21.8 " /><polygon points="637,34.4 637,21.8 617.8,0 609,0 609,25.8 619.9,53.5 " /><polygon points="609,25.8 609,65.6 619.7,53.5 " />
-                <polygon points="686.5,83 674,83 674,63 695.6,63 690.1,40 683.5,40 664.3,83.1 677,105 681.6,105 " /><polygon points="647,53.2 647,105 654.5,105 664.4,83.2 " /><polygon points="683.5,40 674,40 674,34.9 646.6,53 646.8,53 664.3,83.1 " /><polygon points="712,23 712,0 701.3,0 691.2,23 " /><polygon points="654.5,105 677,105 664.3,83.1 " /><polygon points="674,23 675.1,23 652.4,0 647,0 647,53.2 674,34.9 " /><polygon points="686.1,23 680.7,0 652.4,0 675.1,23 " /><polygon points="712,105 712,83 700.1,83 705.4,105 " /><polygon points="708,63 708,40 690.1,40 695.6,63 " /><polygon points="681.6,105 705.4,105 700.1,83 686.5,83 " /><polygon points="691.2,23 701.3,0 680.7,0 686.1,23 " />
-                <path d="M770.6,77.4c-8,0-14.8-3.3-19.2-8.6l-2.6,31.8c6.4,2.9,13.4,4.6,20.8,4.7l17.5-33.8C783,75.2,777.2,77.4,770.6,77.4z" /><path d="M746,53.7l-26.2,12.4c4,15.3,14.8,27.9,29,34.4l2.6-31.8C748.2,64.7,746.2,59.6,746,53.7z" /><path d="M787.2,71.4l-17.5,33.8c0.3,0,0.6,0,0.9,0c14.6,0,27.7-6,37.2-15.5l-19.6-19.3C787.9,70.7,787.6,71,787.2,71.4z" /><path d="M770.6,28.1c7.1,0,13.3,2.5,17.6,6.9l0,0L777.7,0.7c-2.3-0.3-4.7-0.5-7.1-0.5c-4.8,0-9.4,0.6-13.7,1.8l-2.6,31.8C758.5,30.2,764.2,28.1,770.6,28.1z" /><path d="M807.6,15.5c-7.9-7.9-18.3-13.2-29.9-14.8l10.6,34.2L807.6,15.5z" /><path d="M746,52.7c0-7.4,2.8-13.8,7.5-18.2l-30.3-4.2c-3.2,6.8-5,14.4-5,22.4c0,4.6,0.6,9.1,1.7,13.4L746,53.7C746,53.3,746,53,746,52.7z" /><path d="M754.3,33.8l2.6-31.8c-14.9,4-27.2,14.5-33.7,28.3l30.3,4.2C753.7,34.3,754,34,754.3,33.8z" />
-                <polygon points="845,40 845,39 818,39 818,66.2 848.9,40 " /><polygon points="845,63 859.1,63 850.7,40 848.9,40 818,66.2 818,74.6 845,78.3 " /><polygon points="845,83 845,78.3 818,74.6 818,105 839.2,105 847.7,83 " /><polygon points="879,63 879,40 850.7,40 859.1,63 " /><polygon points="839.2,105 865.9,105 880.8,83 847.7,83 " /><polygon points="873.2,23 883,23 883,0 860.4,0 860.4,0 " /><polygon points="883,105 883,83 880.8,83 865.9,105 " /><polygon points="860.4,0.2 860.4,0.2 860.4,0.2 " /><polygon points="845,23 873.2,23 860.6,0.2 818,32.2 818,39 845,39 " /><polygon points="860.4,0 818,0 818,32.2 860.4,0 " />
-              </g>
-            </svg>
-          </figure>
-          {/* <span className="hover-hint">Hover to slow motion</span> */}
+        {/* Top rule */}
+        <div className="w-full h-px bg-gray-200 reveal" style={{ transitionDelay: '0.3s' }}></div>
+
+        {/* ── CARDS GRID ──────────────────────────── */}
+        <div className="
+          relative
+          grid grid-cols-1 sm:grid-cols-2
+          gap-4 sm:gap-6 lg:gap-8
+          border-y border-gray-200
+          py-8 sm:py-10 lg:py-12
+          mb-8 sm:mb-10 lg:mb-12 2xl:mb-16 3xl:mb-20 4xl:mb-28
+        ">
+
+          {/* Middle Vertical Line */}
+          <div className="hidden sm:block absolute top-0 bottom-0 left-1/2 w-px bg-gray-200 -translate-x-1/2"></div>
+
+          {/* Card 1 */}
+          <div className="reveal shine-card group cursor-pointer relative
+            flex items-start gap-4 xs:gap-5 2xl:gap-6 3xl:gap-8 4xl:gap-10
+            p-6 sm:p-8 md:p-10 lg:p-12 2xl:p-14 3xl:p-18 4xl:p-24
+            rounded-2xl
+          " style={{ transitionDelay: '0.4s' }}>
+            <div className="hidden sm:block absolute bottom-0 left-6 right-6 sm:left-8 sm:right-8 md:left-10 md:right-10 lg:left-12 lg:right-12 2xl:left-14 2xl:right-14 3xl:left-18 3xl:right-18 4xl:left-24 4xl:right-24 h-px bg-gray-200"></div>
+            <span className="
+              shrink-0 font-semibold tracking-wider text-linen-400 pt-px
+              text-[10px] sm:text-[10.5px] 2xl:text-[13px] 3xl:text-base 4xl:text-xl
+              transition-all duration-300 group-hover:text-linen-900 group-hover:-translate-y-1
+            ">01</span>
+            <div>
+              <h3 className="
+                font-semibold text-linen-900 leading-snug
+                mb-2 2xl:mb-2.5 3xl:mb-3 4xl:mb-4
+                text-[13px] xs:text-[13.5px] sm:text-[13.5px] md:text-[14px] lg:text-[15px]
+                xl:text-[15.5px] 2xl:text-[18px] 3xl:text-[23px] 4xl:text-[28px]
+                transition-colors duration-300 group-hover:text-amber-800
+              ">Consumer Obsession</h3>
+              <p className="
+                text-linen-600 font-normal leading-[1.72]
+                text-[11.5px] xs:text-[12px] sm:text-[12px] md:text-[12.5px] lg:text-[13px]
+                2xl:text-[15px] 3xl:text-[19px] 4xl:text-[23px]
+                transition-colors duration-300 group-hover:text-linen-800
+              ">Every decision starts and ends with the person who uses our products. We study lives, not just demographics. We listen to silences as much as surveys.</p>
+            </div>
+          </div>
+
+          {/* Card 2 */}
+          <div className="reveal shine-card group cursor-pointer relative
+            flex items-start gap-4 xs:gap-5 2xl:gap-6 3xl:gap-8 4xl:gap-10
+            p-6 sm:p-8 md:p-10 lg:p-12 2xl:p-14 3xl:p-18 4xl:p-24
+            rounded-2xl
+          " style={{ transitionDelay: '0.5s' }}>
+            <div className="hidden sm:block absolute bottom-0 left-6 right-6 sm:left-8 sm:right-8 md:left-10 md:right-10 lg:left-12 lg:right-12 2xl:left-14 2xl:right-14 3xl:left-18 3xl:right-18 4xl:left-24 4xl:right-24 h-px bg-gray-200"></div>
+            <span className="
+              shrink-0 font-semibold tracking-wider text-linen-400 pt-px
+              text-[10px] sm:text-[10.5px] 2xl:text-[13px] 3xl:text-base 4xl:text-xl
+              transition-all duration-300 group-hover:text-linen-900 group-hover:-translate-y-1
+            ">02</span>
+            <div>
+              <h3 className="
+                font-semibold text-linen-900 leading-snug
+                mb-2 2xl:mb-2.5 3xl:mb-3 4xl:mb-4
+                text-[13px] xs:text-[13.5px] sm:text-[13.5px] md:text-[14px] lg:text-[15px]
+                xl:text-[15.5px] 2xl:text-[18px] 3xl:text-[23px] 4xl:text-[28px]
+                transition-colors duration-300 group-hover:text-amber-800
+              ">Design as Strategy</h3>
+              <p className="
+                text-linen-600 font-normal leading-[1.72]
+                text-[11.5px] xs:text-[12px] sm:text-[12px] md:text-[12.5px] lg:text-[13px]
+                2xl:text-[15px] 3xl:text-[19px] 4xl:text-[23px]
+                transition-colors duration-300 group-hover:text-linen-800
+              ">Design is not decoration — it is the clearest expression of a brand's promise. Beautiful and purposeful are never mutually exclusive in our work.</p>
+            </div>
+          </div>
+
+          {/* Card 3 */}
+          <div className="reveal shine-card group cursor-pointer relative
+            flex items-start gap-4 xs:gap-5 2xl:gap-6 3xl:gap-8 4xl:gap-10
+            p-6 sm:p-8 md:p-10 lg:p-12 2xl:p-14 3xl:p-18 4xl:p-24
+            rounded-2xl
+          " style={{ transitionDelay: '0.6s' }}>
+            {/* Note: No bottom line needed on Card 3 because the grid container has border-b */}
+            <span className="
+              shrink-0 font-semibold tracking-wider text-linen-400 pt-px
+              text-[10px] sm:text-[10.5px] 2xl:text-[13px] 3xl:text-base 4xl:text-xl
+              transition-all duration-300 group-hover:text-linen-900 group-hover:-translate-y-1
+            ">03</span>
+            <div>
+              <h3 className="
+                font-semibold text-linen-900 leading-snug
+                mb-2 2xl:mb-2.5 3xl:mb-3 4xl:mb-4
+                text-[13px] xs:text-[13.5px] sm:text-[13.5px] md:text-[14px] lg:text-[15px]
+                xl:text-[15.5px] 2xl:text-[18px] 3xl:text-[23px] 4xl:text-[28px]
+                transition-colors duration-300 group-hover:text-amber-800
+              ">Long-term Thinking</h3>
+              <p className="
+                text-linen-600 font-normal leading-[1.72]
+                text-[11.5px] xs:text-[12px] sm:text-[12px] md:text-[12.5px] lg:text-[13px]
+                2xl:text-[15px] 3xl:text-[19px] 4xl:text-[23px]
+                transition-colors duration-300 group-hover:text-linen-800
+              ">We build brands that outlast us. We resist shortcuts that compromise brand equity. Our portfolio is curated for generational relevance — we measure trust in decades.</p>
+            </div>
+          </div>
+
+          {/* Card 4 */}
+          <div className="reveal shine-card group cursor-pointer relative
+            flex items-start gap-4 xs:gap-5 2xl:gap-6 3xl:gap-8 4xl:gap-10
+            p-6 sm:p-8 md:p-10 lg:p-12 2xl:p-14 3xl:p-18 4xl:p-24
+            rounded-2xl
+          " style={{ transitionDelay: '0.7s' }}>
+            <span className="
+              shrink-0 font-semibold tracking-wider text-linen-400 pt-px
+              text-[10px] sm:text-[10.5px] 2xl:text-[13px] 3xl:text-base 4xl:text-xl
+              transition-all duration-300 group-hover:text-linen-900 group-hover:-translate-y-1
+            ">04</span>
+            <div>
+              <h3 className="
+                font-semibold text-linen-900 leading-snug
+                mb-2 2xl:mb-2.5 3xl:mb-3 4xl:mb-4
+                text-[13px] xs:text-[13.5px] sm:text-[13.5px] md:text-[14px] lg:text-[15px]
+                xl:text-[15.5px] 2xl:text-[18px] 3xl:text-[23px] 4xl:text-[28px]
+                transition-colors duration-300 group-hover:text-amber-800
+              ">Authentic Stories</h3>
+              <p className="
+                text-linen-600 font-normal leading-[1.72]
+                text-[11.5px] xs:text-[12px] sm:text-[12px] md:text-[12.5px] lg:text-[13px]
+                2xl:text-[15px] 3xl:text-[19px] 4xl:text-[23px]
+                transition-colors duration-300 group-hover:text-linen-800
+              ">Every brand in our house is built on a foundation of truth. We celebrate heritage and craftsmanship, ensuring every product tells a story of integrity.</p>
+            </div>
+          </div>
+
         </div>
 
-        <div className="cards-grid">
-          <div className="usp-card">
-            <div className="card-num">01</div>
-            <div className="card-title">Consumer Obsession</div>
-            <div className="card-desc">Every decision starts and ends with the person who uses our products. We study lives, not just demographics. We listen to silences as much as surveys. Our brands exist to serve real human needs with products that feel like they were made specifically for each individual.</div>
-          </div>
-          <div className="usp-card">
-            <div className="card-num">02</div>
-            <div className="card-title">Design as Strategy</div>
-            <div className="card-desc">We believe design is not decoration — it is the clearest expression of a brand's promise. At Nyoraa, every visual identity, every product touchpoint, every piece of communication is treated as strategic. Beautiful and purposeful are never mutually exclusive.</div>
-          </div>
-          <div className="usp-card">
-            <div className="card-num">03</div>
-            <div className="card-title">Long-term Thinking</div>
-            <div className="card-desc">We build brands that outlast us. We resist shortcuts that compromise brand equity for short-term gains. Our portfolio is not assembled for quarterly metrics — it is curated for generational relevance. We invest in trust, and we measure it in decades.</div>
-          </div>
-          <div className="usp-card">
-            <div className="card-num">04</div>
-            <div className="card-title">Authentic Stories</div>
-            <div className="card-desc">Every brand in our house is built on a foundation of truth. We celebrate heritage and craftsmanship, ensuring that every product tells a story of integrity, from the hands that crafted it to the lives it touches.</div>
-          </div>
-        </div>
+        {/* ── STATS STRIP ────────────────────────── */}
+        <div className="group cursor-pointer flex items-center divide-x divide-gray-200 border border-gray-200 rounded-2xl sm:rounded-[2rem]
+          py-8 sm:py-10 md:py-12 lg:py-14
+          px-4 sm:px-6 md:px-8 lg:px-10
+          transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_0_50px_rgba(200,190,180,0.3)] hover:bg-[#faf9f7] hover:border-gray-300
+        ">
 
-        <div className="stats-strip">
-          <div className="stat-item">
-            <div className="stat-num">4+</div>
-            <div className="stat-lbl">Child brands</div>
+          <div className="reveal
+            flex-1 pr-5
+            xs:pr-6 sm:pr-8 md:pr-10 lg:pr-12 xl:pr-14
+            2xl:pr-16 3xl:pr-20 4xl:pr-28
+          " style={{ transitionDelay: '0.8s' }}>
+            <p className="
+              font-light text-linen-700 leading-none tracking-tight
+              mb-1.5 2xl:mb-2 3xl:mb-3
+              text-[28px] xs:text-[30px] sm:text-[32px] md:text-[36px] lg:text-[40px]
+              xl:text-[44px] 2xl:text-[56px] 3xl:text-[72px] 4xl:text-[88px]
+              transition-transform duration-500 group-hover:scale-105 group-hover:text-linen-900
+            "><CountUp end={4} duration={1.2} />+</p>
+            <p className="
+              font-medium uppercase tracking-[0.16em] text-linen-500
+              text-[9px] xs:text-[9.5px] sm:text-[10px] lg:text-[10.5px]
+              2xl:text-xs 3xl:text-sm 4xl:text-base
+            ">Child brands</p>
           </div>
-          <div className="stat-item">
-            <div className="stat-num">6+</div>
-            <div className="stat-lbl">Years of trust</div>
+
+          <div className="reveal
+            flex-1 px-5
+            xs:px-6 sm:px-8 md:px-10 lg:px-12 xl:px-14
+            2xl:px-16 3xl:px-20 4xl:px-28
+          " style={{ transitionDelay: '0.9s' }}>
+            <p className="
+              font-light text-linen-700 leading-none tracking-tight
+              mb-1.5 2xl:mb-2 3xl:mb-3
+              text-[28px] xs:text-[30px] sm:text-[32px] md:text-[36px] lg:text-[40px]
+              xl:text-[44px] 2xl:text-[56px] 3xl:text-[72px] 4xl:text-[88px]
+              transition-transform duration-500 group-hover:scale-105 group-hover:text-linen-900
+            "><CountUp end={6} duration={1.2} />+</p>
+            <p className="
+              font-medium uppercase tracking-[0.16em] text-linen-500
+              text-[9px] xs:text-[9.5px] sm:text-[10px] lg:text-[10.5px]
+              2xl:text-xs 3xl:text-sm 4xl:text-base
+            ">Years of trust</p>
           </div>
-          <div className="stat-item">
-            <div className="stat-num">10+</div>
-            <div className="stat-lbl">Products offered</div>
+
+          <div className="reveal
+            flex-1 pl-5
+            xs:pl-6 sm:pl-8 md:pl-10 lg:pl-12 xl:pl-14
+            2xl:pl-16 3xl:pl-20 4xl:pl-28
+          " style={{ transitionDelay: '1.0s' }}>
+            <p className="
+              font-light text-linen-700 leading-none tracking-tight
+              mb-1.5 2xl:mb-2 3xl:mb-3
+              text-[28px] xs:text-[30px] sm:text-[32px] md:text-[36px] lg:text-[40px]
+              xl:text-[44px] 2xl:text-[56px] 3xl:text-[72px] 4xl:text-[88px]
+              transition-transform duration-500 group-hover:scale-105 group-hover:text-linen-900
+            "><CountUp end={10} duration={1.2} />+</p>
+            <p className="
+              font-medium uppercase tracking-[0.16em] text-linen-500
+              text-[9px] xs:text-[9.5px] sm:text-[10px] lg:text-[10.5px]
+              2xl:text-xs 3xl:text-sm 4xl:text-base
+            ">Products offered</p>
           </div>
+
         </div>
       </section>
 

@@ -1919,8 +1919,13 @@ footer {
 }
 
 @keyframes darkMetallicShine {
-  0% { background-position: -200% center; }
-  100% { background-position: 200% center; }
+  0% {
+    background-position: -200% center;
+  }
+
+  100% {
+    background-position: 200% center;
+  }
 }
 
 .stat-num {
@@ -4741,4 +4746,51 @@ hr.div {
     flex: 0 0 100%;
     max-width: 100%;
   }
+}
+
+/* Generic Reveal Animation for new sections */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.in, .reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Card Shine Effect */
+.shine-card {
+  position: relative;
+  overflow: hidden;
+  transition: background-color 0.4s ease, transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.shine-card:hover {
+  background-color: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.05);
+  transform: translateY(-2px);
+}
+
+.shine-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0) 100%);
+  transform: skewX(-25deg);
+  z-index: 10;
+  pointer-events: none;
+}
+
+.shine-card:hover::before {
+  animation: shine-sweep 0.7s ease-out forwards;
+}
+
+@keyframes shine-sweep {
+  0% { left: -150%; }
+  100% { left: 200%; }
 }
