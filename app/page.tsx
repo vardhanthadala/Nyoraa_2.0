@@ -453,6 +453,10 @@ export default function Home() {
         </div>
       </section>
 
+      <div style={{ background: '#ffffff' }}>
+        <hr className="div" />
+      </div>
+
       <section className="why-section reveal">
         <div className="section-header">
           <div className="header-left">

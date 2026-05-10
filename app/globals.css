@@ -1707,8 +1707,8 @@ footer {
   padding: 100px var(--ui-inset);
   position: relative;
   overflow: hidden;
-  background: var(--ink);
-  color: var(--bg);
+  background: #FFFFFF;
+  color: var(--ink);
 }
 
 .why-section::before {
@@ -1737,7 +1737,7 @@ footer {
   font-weight: 500;
   letter-spacing: 3px;
   text-transform: uppercase;
-  color: var(--gold);
+  color: #888888;
   margin-bottom: 12px;
   display: flex;
   align-items: center;
@@ -1749,7 +1749,7 @@ footer {
   display: block;
   width: 32px;
   height: 1px;
-  background: var(--gold);
+  background: #888888;
 }
 
 .why-section .section-title {
@@ -1757,18 +1757,19 @@ footer {
   font-size: var(--fs-h2);
   line-height: var(--lh-h2);
   letter-spacing: 0.02em;
-  color: var(--bg);
+  color: var(--ink);
 }
 
 .why-section .section-title span {
-  color: var(--gold);
+  color: #a8884d;
+  /* Darker gold for light bg */
 }
 
 .why-section .header-right {
   max-width: 420px;
   font-size: 15px;
   line-height: 1.8;
-  color: #ffffff;
+  color: var(--ink-s);
   padding-bottom: 12px;
 }
 
@@ -1836,7 +1837,7 @@ footer {
 }
 
 .usp-card {
-  background: #395355;
+  background: #FAFAFA;
   padding: 48px 36px;
   position: relative;
   overflow: hidden;
@@ -1855,7 +1856,7 @@ footer {
 }
 
 .usp-card:hover {
-  background: #251d19;
+  background: #F0F0F0;
 }
 
 .usp-card:hover::after {
@@ -1885,7 +1886,7 @@ footer {
   font-family: var(--font-display);
   font-size: 24px;
   letter-spacing: 0.5px;
-  color: var(--bg);
+  color: var(--ink);
   margin-bottom: 12px;
 }
 
@@ -1908,9 +1909,9 @@ footer {
 }
 
 .stat-item {
-  background: #1a1a1a;
+  background: #F8F8F8;
   padding: 40px 32px;
-  border-right: 1px solid rgba(255, 255, 255, 0.05);
+  border-right: 1px solid rgba(0, 0, 0, 0.05);
   text-align: center;
 }
 
@@ -1921,13 +1922,13 @@ footer {
 .stat-num {
   font-family: var(--font-display);
   font-size: 56px;
-  color: #ffffff;
+  color: var(--ink);
   line-height: 1;
 }
 
 .stat-lbl {
   font-size: 11px;
-  color: #ffffff;
+  color: var(--ink-s);
   letter-spacing: 1px;
   text-transform: uppercase;
   margin-top: 8px;
@@ -2192,7 +2193,8 @@ footer {
     flex-wrap: wrap;
     gap: 3rem;
   }
-  .footer-links > .footer-col {
+
+  .footer-links>.footer-col {
     flex: 0 0 calc(50% - 1.5rem);
   }
 }
@@ -2202,7 +2204,8 @@ footer {
     flex-direction: column;
     gap: 2.5rem;
   }
-  .footer-links > .footer-col {
+
+  .footer-links>.footer-col {
     flex: 0 0 100%;
   }
 
