@@ -165,7 +165,9 @@ p {
 }
 
 /* TYPOGRAPHY UTILITIES */
-.tag, .sh-eye, .ls-eyebrow {
+.tag,
+.sh-eye,
+.ls-eyebrow {
   font-family: var(--fb);
   font-size: var(--fs-xs);
   font-weight: var(--fw-semibold);
@@ -178,7 +180,11 @@ p {
   gap: 0.75rem;
 }
 
-.body-text, .copy, .founder-bio, .sh-p, .ls-subtext {
+.body-text,
+.copy,
+.founder-bio,
+.sh-p,
+.ls-subtext {
   font-family: var(--fb);
   font-size: var(--fs-body);
   line-height: var(--lh-body);
@@ -186,7 +192,8 @@ p {
   font-weight: var(--fw-regular);
 }
 
-.cta, .btn {
+.cta,
+.btn {
   font-family: var(--fb);
   font-size: var(--fs-btn);
   font-weight: var(--fw-medium);
@@ -378,17 +385,15 @@ nav.nav-hidden {
 }
 
 .nav-logo {
-  font-family: var(--fd);
-  font-size: 1.65rem;
-  font-weight: 500;
-  letter-spacing: .35em;
-  color: #000000;
-  text-transform: uppercase
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  max-width: 180px;
+  height: 40px;
+  position: relative;
 }
 
-.nav-logo span {
-  color: #000000;
-}
+
 
 .nav-links {
   display: flex;
@@ -399,7 +404,7 @@ nav.nav-hidden {
 .nav-links a {
   color: #000000;
   text-decoration: none;
-  font-size: var(--fs-btn);
+  font-size: 1.1rem;
   font-weight: var(--fw-medium);
   letter-spacing: .18em;
   text-transform: uppercase;
@@ -676,6 +681,12 @@ nav.nav-hidden {
   opacity: 0;
   translate: 0 var(--reveal-offset);
   transition: opacity var(--reveal-duration) ease 0.35s, translate var(--reveal-duration) ease 0.35s, background 0.2s, color 0.2s;
+}
+
+#scroll_container .cta svg {
+  width: 0.85rem;
+  height: 0.85rem;
+  flex-shrink: 0;
 }
 
 #scroll_container .cta.visible {
@@ -2012,6 +2023,51 @@ footer {
   .logo-band {
     padding: 16px 0.5rem !important;
     margin-bottom: 30px !important;
+  }
+}
+
+/* VISION SECTION SPLIT GRID */
+.vision-split-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  padding: 4rem 0;
+}
+
+.vision-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.vision-h {
+  font-family: var(--fd);
+  font-size: 3rem;
+  line-height: 1.2;
+  font-weight: 400;
+}
+
+.vision-h em {
+  font-style: italic;
+  font-family: var(--fi);
+}
+
+.vision-p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  opacity: 0.7;
+  max-width: 500px;
+}
+
+@media (max-width: 1024px) {
+  .vision-split-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    padding: 2rem 0;
+  }
+  
+  .vision-h {
+    font-size: 2.2rem;
   }
 }
 

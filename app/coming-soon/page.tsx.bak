@@ -1,0 +1,127 @@
+"use client";
+import React, { useEffect, useRef } from 'react';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
+import { gsap } from 'gsap';
+
+export default function ComingSoon() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const textRef = useRef<HTMLHeadingElement>(null);
+
+  useEffect(() => {
+    if (textRef.current) {
+      gsap.fromTo(textRef.current,
+        { opacity: 0, y: 30 },
+        { opacity: 1, y: 0, duration: 1.5, ease: "power4.out" }
+      );
+    }
+
+    // Floating particles effect
+    const container = containerRef.current;
+    if (container) {
+      for (let i = 0; i < 20; i++) {
+        const dot = document.createElement('div');
+        dot.className = 'floating-dot';
+        container.appendChild(dot);
+
+        gsap.set(dot, {
+          x: Math.random() * window.innerWidth,
+          y: Math.random() * window.innerHeight,
+          opacity: Math.random() * 0.5,
+          scale: Math.random()
+        });
+
+        gsap.to(dot, {
+          y: "-=100",
+          x: `+=${(Math.random() - 0.5) * 100}`,
+          opacity: 0,
+          duration: 3 + Math.random() * 4,
+          repeat: -1,
+          ease: "none",
+          delay: Math.random() * 5
+        });
+      }
+    }
+  }, []);
+
+  return (
+    <div className="coming-soon-wrapper" ref={containerRef} style={{
+      background: '#000',
+      minHeight: '100vh',
+      display: 'flex',
+      flexDirection: 'column',
+      color: '#fff',
+      overflow: 'hidden'
+    }}>
+      <Navbar />
+
+      <main style={{
+        flex: 1,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '0 1rem',
+        position: 'relative',
+        zIndex: 2
+      }}>
+        <div style={{ textAlign: 'center' }}>
+          <p style={{
+            textTransform: 'uppercase',
+            letterSpacing: '0.3em',
+            fontSize: '0.8rem',
+            opacity: 0.6,
+            marginBottom: '1.5rem'
+          }}>New Experience</p>
+          <h1 ref={textRef} style={{
+            fontFamily: 'var(--fd)',
+            fontSize: 'clamp(3rem, 10vw, 6rem)',
+            fontWeight: 400,
+            lineHeight: 1,
+            marginBottom: '2rem'
+          }}>Coming Soon</h1>
+          <p style={{
+            maxWidth: '500px',
+            margin: '0 auto',
+            opacity: 0.7,
+            lineHeight: 1.6,
+            fontSize: '1.1rem'
+          }}>
+            We are meticulously crafting a new standard in conscious luxury.
+            Sign up to be the first to experience our upcoming releases.
+          </p>
+
+          <div style={{ marginTop: '3rem' }}>
+            <a href="/" style={{
+              padding: '1rem 2rem',
+              border: '1px solid rgba(255,255,255,0.2)',
+              borderRadius: '50px',
+              color: '#fff',
+              textDecoration: 'none',
+              fontSize: '0.9rem',
+              letterSpacing: '0.1em',
+              transition: 'all 0.3s'
+            }}
+              onMouseOver={(e) => e.currentTarget.style.background = 'rgba(255,255,255,0.1)'}
+              onMouseOut={(e) => e.currentTarget.style.background = 'transparent'}
+            >
+              BACK TO HOME
+            </a>
+          </div>
+        </div>
+      </main>
+
+      <Footer />
+
+      <style jsx global>{`
+        .floating-dot {
+          position: absolute;
+          width: 4px;
+          height: 4px;
+          background: #fff;
+          border-radius: 50%;
+          pointer-events: none;
+        }
+      `}</style>
+    </div>
+  );
+}

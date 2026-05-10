@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "NYORAA — House of Beauty",
+  title: "NYORAA — House of Brands",
   description: "Six iconic brands. One vision. Crafting transformative personal care rooted in pure ingredients and breakthrough science.",
 };
 
