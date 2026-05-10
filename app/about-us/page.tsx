@@ -2,6 +2,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import 'swiper/css';
@@ -262,46 +263,38 @@ export default function AboutUs() {
                     </div>
                     <div className="swiper aquatic-swiper">
                         <div className="swiper-wrapper">
-                            <div className="swiper-slide swiper-slide--one">
+                            <div className="swiper-slide swiper-slide--one" style={{ backgroundImage: 'url(/brands/hueglam.png)', backgroundSize: 'cover' }}>
                                 <div>
-                                    <h3>Jellyfish</h3>
-                                    <p>Jellyfish and sea jellies are the informal common names given to the medusa-phase of certain gelatinous members of the subphylum Medusozoa, a major part of the phylum Cnidaria.</p>
-                                    <a href="https://en.wikipedia.org/wiki/Jellyfish" target="_blank">explore</a>
+                                    <h3>HUEGLAM</h3>
+                                    <p>Empowering individuals to embrace their unique beauty through innovative skincare and vibrant aesthetics.</p>
+                                    <a href="https://hueglam.com/" target="_blank">explore</a>
                                 </div>
                             </div>
-                            <div className="swiper-slide swiper-slide--two">
+                            <div className="swiper-slide swiper-slide--two" style={{ backgroundImage: 'url(/brands/wellness.png)', backgroundSize: 'cover' }}>
                                 <div>
-                                    <h3>Seahorse</h3>
-                                    <p>Seahorses are mainly found in shallow tropical and temperate salt water throughout the world. They live in sheltered areas such as seagrass beds, estuaries, coral reefs, and mangroves.</p>
-                                    <a href="https://en.wikipedia.org/wiki/Seahorse" target="_blank">explore</a>
+                                    <h3>WELLNESS</h3>
+                                    <p>Holistic rituals designed to restore balance and rejuvenate the mind, body, and spirit.</p>
+                                    <a href="#">explore</a>
                                 </div>
                             </div>
-                            <div className="swiper-slide swiper-slide--three">
+                            <div className="swiper-slide swiper-slide--three" style={{ backgroundImage: 'url(/brands/home.png)', backgroundSize: 'cover' }}>
                                 <div>
-                                    <h3>octopus</h3>
-                                    <p>Octopuses inhabit various regions of the ocean, including coral reefs, pelagic waters, and the seabed; some live in the intertidal zone and others at abyssal depths.</p>
-                                    <a href="https://en.wikipedia.org/wiki/Octopus" target="_blank">explore</a>
+                                    <h3>HOME</h3>
+                                    <p>Elevating your sanctuary with curated essentials that transform daily spaces into restorative retreats.</p>
+                                    <a href="#">explore</a>
                                 </div>
                             </div>
-                            <div className="swiper-slide swiper-slide--four">
+                            <div className="swiper-slide swiper-slide--four" style={{ backgroundImage: 'url(/brands/partners.png)', backgroundSize: 'cover' }}>
                                 <div>
-                                    <h3>Shark</h3>
-                                    <p>Sharks are a group of elasmobranch fish characterized by a cartilaginous skeleton, five to seven gill slits on the sides of the head, and pectoral fins that are not fused to the head.</p>
-                                    <a href="https://en.wikipedia.org/wiki/Shark" target="_blank">explore</a>
-                                </div>
-                            </div>
-                            <div className="swiper-slide swiper-slide--five">
-                                <div>
-                                    <h3>Dolphin</h3>
-                                    <p>Dolphins are widespread. Most species prefer the warm waters of the tropic zones, but some, such as the right whale dolphin, prefer colder climates.</p>
-                                    <a href="https://en.wikipedia.org/wiki/Dolphin" target="_blank">explore</a>
+                                    <h3>PARTNERS</h3>
+                                    <p>Strategic collaborations with global innovators to redefine the standards of conscious luxury.</p>
+                                    <a href="#">explore</a>
                                 </div>
                             </div>
                         </div>
                         <div className="swiper-pagination"></div>
                     </div>
-                    <img src="https://cdn.pixabay.com/photo/2021/11/04/19/39/jellyfish-6769173_960_720.png" alt="" className="bg r" />
-                    <img src="https://cdn.pixabay.com/photo/2012/04/13/13/57/scallop-32506_960_720.png" alt="" className="bg2 r" />
+
                 </main>
             </section>
 
@@ -320,7 +313,7 @@ export default function AboutUs() {
                         <span className="vwr-line"><span className="vwr-word">Making</span> <span className="vwr-word d1">Honest</span></span>
                         <span className="vwr-line"><span className="vwr-word d2">Beauty</span> <span className="vwr-word d3">Universal</span></span>
                     </div>
-                    <p className="sh-p r d3" style={{ maxWidth: '600px', margin: '0 auto 4rem', textAlign: 'center' }}>We exist to democratise effective, transparent personal care — where every formulation earns its place through clinical evidence, not marketing spend.</p>
+                    <p className="sh-p r d3" style={{ maxWidth: '600px', margin: '0 auto 4rem', textAlign: 'center' }}>Nyoraa aims to become one of India’s most trusted consumer brand houses by building meaningful, long-term relationships with customers. Their mission is to create high-quality brands that earn genuine loyalty through trust, storytelling, community, and consistent value — not just marketing.</p>
                     <div className="page-content r d2">
                         <div className="card">
                             <div className="content">
@@ -437,53 +430,13 @@ export default function AboutUs() {
                 <div className="cta3-content">
                     <h2 id="h3">Let's Build the Future of <br />Honest Beauty</h2>
                     <p id="p3">Partner with Nyoraa to redefine transparency in skincare.</p>
-                    <button className="btn3" id="b3">Get In Touch</button>
+                    <Link href="/contacts-us">
+                        <button className="btn3" id="b3">Get In Touch</button>
+                    </Link>
                 </div>
             </section>
 
-            <footer>
-                <div className="footer-wrap">
-                    <div className="footer-content">
-                        <div className="footer-links">
-                            <div className="footer-col">
-                                <b>Eldew Rituals</b>
-                                <a href="#">Face Care</a>
-                                <a href="#">Serums</a>
-                                <a href="#">Cleansers</a>
-                                <a href="#">Moisturizers</a>
-                            </div>
-                            <div className="footer-col">
-                                <b>Brand Spotlight</b>
-                                <a href="#">Auré</a>
-                                <a href="#">Velva</a>
-                                <a href="#">Nūra</a>
-                                <a href="#">Lumina</a>
-                            </div>
-                            <div className="footer-col">
-                                <b>Science & Research</b>
-                                <a href="#">Molecular Lab</a>
-                                <a href="#">Purity Standards</a>
-                                <a href="#">Clinical Trials</a>
-                                <a href="#">Sustainability</a>
-                                <a href="#">Ethics</a>
-                            </div>
-                            <div className="footer-col">
-                                <b>Corporate</b>
-                                <a href="#">About Nyoraa</a>
-                                <a href="#">Careers</a>
-                                <a href="#">Investors</a>
-                                <a href="#">Contact</a>
-                            </div>
-                        </div>
-                        <div className="footer-bottom">
-                            <div className="ft-brand-wrap">
-                                <div className="ft-brand">N<span>y</span>oraa</div>
-                                <p>©2026 Nyoraa House of Beauty. All rights reserved.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </footer>
+            <Footer />
         </div>
     );
 }

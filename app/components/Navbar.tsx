@@ -3,6 +3,8 @@
 import React, { useState, useEffect, useRef, memo } from "react";
 import Link from "next/link";
 
+import Image from "next/image";
+
 const Navbar = memo(() => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [navHidden, setNavHidden] = useState(false);
@@ -32,9 +34,16 @@ const Navbar = memo(() => {
 
   return (
     <nav className={`nav-container ${navHidden ? "nav-hidden" : ""}`}>
-      <div className="nav-logo">
-        N<span>y</span>oraa
-      </div>
+      <Link href="/" className="nav-logo">
+        <Image
+          src="/logo.png"
+          alt="Nyoraa"
+          width={180}
+          height={60}
+          style={{ objectFit: "contain", height: "auto" }}
+          priority
+        />
+      </Link>
       <ul className={`nav-links ${isMenuOpen ? "active" : ""}`}>
         <li>
           <Link href="/" onClick={() => setIsMenuOpen(false)}>

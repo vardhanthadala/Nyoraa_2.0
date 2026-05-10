@@ -1,0 +1,12 @@
+﻿<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1536.2 755.1" style="enable-background:new 0 0 1536.2 755.1;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#E6E7E8;}.st1{fill:#D1D3D4;}.st2{fill:#F4F4F4;}.st3{fill:#BCBEC0;}.st4{fill:#231F20;}.st5{fill:#FFFFFF;}.st6{fill:#D36866;}.st7{fill:#C2C4C6;}.st8{fill:#DBDBDB;}.st9{fill:#A7A9AC;}.st10{fill:#808285;}
+  @keyframes swinging{0%{transform:rotate(10deg);}50%{transform:rotate(-5deg)}100%{transform:rotate(10deg);}}
+  @keyframes sleeping{0%{opacity:0;}50%{opacity:1;}100%{opacity:0;}}
+  #swinger{transform-origin:top center;transform-box:fill-box;animation:swinging 3.5s ease-in-out forwards infinite;}
+  #zone{opacity:0;animation:sleeping 3.5s ease-in-out forwards infinite;}
+  #ztwo{opacity:0;animation:sleeping 3.5s ease-in-out forwards infinite;animation-delay:0.4s;}
+  #zthree{opacity:0;animation:sleeping 3.5s ease-in-out forwards infinite;animation-delay:0.7s;}
+  #zfour{opacity:0;animation:sleeping 3.5s ease-in-out forwards infinite;animation-delay:1s;}
+  #zfive{opacity:0;animation:sleeping 3.5s ease-in-out forwards infinite;animation-delay:1.3s;}
+</style>

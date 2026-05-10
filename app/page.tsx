@@ -24,25 +24,19 @@ export default function Home() {
   const [activeBrand, setActiveBrand] = useState(0);
 
   const brands = useMemo(() => [
-    { name: "Auré", sub: "Botanical Face Care", icon: "fas fa-leaf", bg: "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?auto=format&fit=crop&q=80&w=800" },
-    { name: "Nūra", sub: "Precision Actives", icon: "fas fa-flask", bg: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&q=80&w=800" },
-    { name: "Velva", sub: "Silk Hair Systems", icon: "fas fa-wind", bg: "https://images.unsplash.com/photo-1559599101-f09722fb4948?auto=format&fit=crop&q=80&w=800" },
-    { name: "Lumina", sub: "Arctic Hydration", icon: "fas fa-tint", bg: "https://images.unsplash.com/photo-1612817288484-6f916006741a?auto=format&fit=crop&q=80&w=800" },
-    { name: "Vera", sub: "Botanical Defense", icon: "fas fa-shield-alt", bg: "https://images.unsplash.com/photo-1611080626919-7cf5a9dcab5b?auto=format&fit=crop&q=80&w=800" },
-    { name: "Lyra", sub: "Signature Scent", icon: "fas fa-magic", bg: "https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&q=80&w=800" },
-    { name: "Kora", sub: "Body Wellness", icon: "fas fa-spa", bg: "https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?auto=format&fit=crop&q=80&w=800" },
-    { name: "Iris", sub: "Precision Eye Care", icon: "fas fa-eye", bg: "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?auto=format&fit=crop&q=80&w=800" }
+    { name: "Gentle Cleanser", sub: "Hueglam Essentials", icon: "fas fa-water", bg: "/products/Faceswash.webp" },
+    { name: "Hydrating Moisturizer", sub: "Hueglam Essentials", icon: "fas fa-leaf", bg: "/products/Mositruizer.webp" },
+    { name: "Essential Combo", sub: "Hueglam Essentials", icon: "fas fa-box-open", bg: "/products/combo.webp" },
+    { name: "Radiance Serum", sub: "Hueglam Essentials", icon: "fas fa-sparkles", bg: "/products/face_serum_bottle.webp" },
+    { name: "Sun Shield", sub: "Hueglam Essentials", icon: "fas fa-sun", bg: "/products/sunscreen.webp" }
   ], []);
 
   const brandDescriptions = useMemo(() => [
-    "Auré redefines the first step of your ritual. Our lipid-replenishing cleansers and creams prepare the canvas, ensuring purity without compromise.",
-    "Nūra is precision in a bottle. We target hyperpigmentation and aging with dropper-based serums rooted in clinical transparency and rapid results.",
-    "Velva brings silk to your strands. Our protein-complex shampoos and masks transform texture into a frizz-free, high-gloss masterpiece.",
-    "Lumina delivers deep arctic hydration. We utilize molecular moisture technology to repair the skin's barrier and lock in a dewy, translucent glow.",
-    "Vera is your botanical shield. Our sun protection and anti-pollution formulas create a breathable barrier against modern urban stressors.",
-    "Lyra is the art of sensory identity. Each fragrance is an olfactory narrative crafted from rare essential oils and emotive resonance.",
-    "Kora focuses on holistic body wellness. Our rituals combine skin-firming actives with aromatherapeutic notes for total mind-body rejuvenation.",
-    "Iris provides specialized care for the eyes. We target fine lines and fatigue with cooling, scientific formulas for a brightened, awakened look."
+    "Our Gentle Cleanser effectively removes impurities while maintaining the skin's natural moisture balance for a fresh, clean canvas.",
+    "The Hydrating Moisturizer provides deep, long-lasting hydration with a lightweight texture that leaves skin feeling soft and resilient.",
+    "The Essential Combo brings together our core skincare heroes for a complete ritual that simplifies your path to glowing skin.",
+    "Our Radiance Serum is a potent blend of actives designed to brighten your complexion and even out skin tone for a luminous finish.",
+    "The Sun Shield offers broad-spectrum protection against UV rays and environmental stressors with a breathable, non-greasy formula."
   ], []);
 
   useEffect(() => {
@@ -212,12 +206,12 @@ export default function Home() {
         if (hudPctRef.current) hudPctRef.current.textContent = Math.round(smooth * 100).toString().padStart(3, '0') + '%';
         if (progFillRef.current) progFillRef.current.style.width = (smooth * 100) + '%';
 
-        const NAMES = ["AURÉ", "NŪRA", "LUMINA", "VERA"];
+        const NAMES = ["HUEGLAM", "WELLNESS", "HOME", "PARTNERS"];
         if (sceneNameRef.current) sceneNameRef.current.textContent = NAMES[si];
         if (dotsRef.current) Array.from(dotsRef.current.children).forEach((d, i) => (d as HTMLElement).classList.toggle("active", i === si));
 
         gl.uniform1f(uT, now / 1000); gl.uniform1f(uS, smooth); gl.uniform1f(uSc, si); gl.uniform1f(uBl, bl);
-        gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4); 
+        gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
       };
       gsap.ticker.add(frame);
 
@@ -227,21 +221,21 @@ export default function Home() {
         const chars = final.replace(/\s/g, '');
         const original = el.innerHTML;
         let its = 0;
-        
+
         const step = () => {
           if (!containerRef.current) return; // Stop if component unmounted
-          
+
           el.innerText = final.split("").map((c, i) => {
             if (i < its) return final[i];
             if (c === ' ' || c === '\n') return c;
             return chars[Math.floor(Math.random() * chars.length)];
           }).join("");
-          
+
           if (its >= final.length) {
             el.innerHTML = original;
             return;
           }
-          
+
           its += final.length / (duration / 30);
           setTimeout(step, 30);
         };
@@ -278,10 +272,10 @@ export default function Home() {
         const target = parseInt(text.replace(/[^0-9]/g, ''));
         const suffix = text.replace(/[0-9]/g, '');
         const startVal = Math.floor(target * 0.5);
-        
-        gsap.fromTo(num, 
+
+        gsap.fromTo(num,
           { innerHTML: startVal },
-          { 
+          {
             innerHTML: target,
             duration: 2,
             ease: "power2.out",
@@ -290,7 +284,7 @@ export default function Home() {
               trigger: ".stats-strip",
               start: "top 90%",
             },
-            onUpdate: function() {
+            onUpdate: function () {
               num.innerHTML = Math.floor(parseFloat(num.innerHTML)) + suffix;
             }
           }
@@ -331,15 +325,13 @@ export default function Home() {
       <div id="scroll_container">
         <section id="s0" className="side-layout">
           <div className="text-card">
-            <div className="tag">Brand Spotlight — Auré</div>
-            <h1>THE<br />FOUNDATION<br />OF GLOW</h1>
+            <div className="tag">Brand Spotlight — HUEGLAM</div>
+            <h2>EMPOWERING<br />UNIQUE<br />BEAUTY</h2>
             <p className="body-text">
-              Auré redefines the first step of your ritual. Our lipid-replenishing
-              cleansers and creams prepare the canvas, ensuring purity without
-              compromising the skin's natural barrier.
+              At HUEGLAM, our mission is to empower individuals to embrace their unique beauty through innovative, high-quality skincare and cosmetics. We strive to make self-expression effortless and accessible, blending cutting-edge formulations with vibrant aesthetics for every shade, style, and story.
             </p>
-            <a className="cta" href="#s1">
-              Explore Auré
+            <a className="cta" href="https://hueglam.com/" target="_blank" rel="noopener noreferrer">
+              Explore HUEGLAM
               <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5">
                 <path d="M1 6h10M6 1l5 5-5 5" />
               </svg>
@@ -354,21 +346,21 @@ export default function Home() {
         <section id="s1">
           <div className="text-card right">
             <div className="h-line"></div>
-            <div className="tag">Brand Spotlight — Nūra</div>
-            <h2>PRECISION<br />ACTIVES</h2>
+            <div className="tag">Brand Spotlight — Wellness (Soon)</div>
+            <h2>HOLISTIC<br />WELLNESS</h2>
             <p className="body-text">
-              Where science meets serenity. Nūra's concentrated serums and night
-              treatments deliver high-potency actives—Retinol, Vitamin C, and
-              Peptides—directly where they're needed most.
+              Our upcoming Wellness collection focuses on the intersection of inner
+              balance and outer radiance. Crafted with adaptogens and restorative
+              botanicals for a total mind-body rejuvenation.
             </p>
             <div className="stat-row" style={{ justifyContent: "flex-end" }}>
               <div className="stat">
-                <span className="stat-num">98%</span>
-                <span className="stat-label">Purity</span>
+                <span className="stat-num">100%</span>
+                <span className="stat-label">Organic</span>
               </div>
               <div className="stat">
-                <span className="stat-num">12h</span>
-                <span className="stat-label">Release</span>
+                <span className="stat-num">Coming</span>
+                <span className="stat-label">Soon</span>
               </div>
             </div>
           </div>
@@ -377,15 +369,15 @@ export default function Home() {
         <section id="s2">
           <div className="text-card">
             <div className="h-line"></div>
-            <div className="tag">Brand Spotlight — Lumina</div>
-            <h2>MAXIMUM<br />HYDRATION</h2>
+            <div className="tag">Brand Spotlight — Home (Soon)</div>
+            <h2>CURATED<br />HOME</h2>
             <p className="body-text">
-              Lumina's signature face creams are engineered for 24-hour moisture.
-              A cloud-like texture that melts into the skin, leaving a finish
-              that is both dewy and resilient.
+              Transforming your living space into a sanctuary. Our Home line will
+              feature olfactory narratives and aesthetic essentials designed to
+              elevate your daily environment.
             </p>
             <a className="cta" href="#s3">
-              View Collection
+              Notify Me
               <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5">
                 <path d="M1 6h10M6 1l5 5-5 5" />
               </svg>
@@ -396,12 +388,12 @@ export default function Home() {
         <section id="s3">
           <div className="text-card center">
             <div className="h-line"></div>
-            <div className="tag">Brand Spotlight — Vera</div>
-            <h2>BOTANICAL<br />SHIELD</h2>
+            <div className="tag">Brand Spotlight — Partner Brands</div>
+            <h2>PARTNER<br />BRANDS</h2>
             <p className="body-text">
-              Vera harnesses the defensive power of rare botanicals. Our barrier-repair
-              creams and mineral sunscreens protect your radiance from environmental
-              stressors and UV damage.
+              Collaborating with global innovators who share our commitment to
+              purity and purpose. Discover a curated selection of brands that
+              resonate with the Nyoraa philosophy.
             </p>
           </div>
         </section>
@@ -409,8 +401,20 @@ export default function Home() {
 
       <div className="stripe">
         <div className="stripe-t">
-          <span>Face Care</span><span className="dot">✦</span><span>Shampoo &amp; Hair</span><span className="dot">✦</span><span>Body Wellness</span><span className="dot">✦</span><span>Serums &amp; Actives</span><span className="dot">✦</span><span>Clean Beauty</span><span className="dot">✦</span><span>Sustainable Formulas</span><span className="dot">✦</span><span>Men's Grooming</span><span className="dot">✦</span><span>Sun Protection</span><span className="dot">✦</span>
-          <span>Face Care</span><span className="dot">✦</span><span>Shampoo &amp; Hair</span><span className="dot">✦</span><span>Body Wellness</span><span className="dot">✦</span><span>Serums &amp; Actives</span><span className="dot">✦</span><span>Clean Beauty</span><span className="dot">✦</span><span>Sustainable Formulas</span><span className="dot">✦</span><span>Men's Grooming</span><span className="dot">✦</span><span>Sun Protection</span><span className="dot">✦</span>
+          <span>heritage&future</span><span className="dot">✦</span>
+          <span>authentic stories</span><span className="dot">✦</span>
+          <span>purpose-led design</span><span className="dot">✦</span>
+          <span>brand creation</span><span className="dot">✦</span>
+          <span>hueglam</span><span className="dot">✦</span>
+          <span>innovation</span><span className="dot">✦</span>
+          <span>consumer first</span><span className="dot">✦</span>
+          <span>heritage&future</span><span className="dot">✦</span>
+          <span>authentic stories</span><span className="dot">✦</span>
+          <span>purpose-led design</span><span className="dot">✦</span>
+          <span>brand creation</span><span className="dot">✦</span>
+          <span>hueglam</span><span className="dot">✦</span>
+          <span>innovation</span><span className="dot">✦</span>
+          <span>consumer first</span><span className="dot">✦</span>
         </div>
       </div>
 
@@ -484,51 +488,37 @@ export default function Home() {
         <div className="cards-grid">
           <div className="usp-card">
             <div className="card-num">01</div>
-            <svg className="card-icon" viewBox="0 0 36 36" fill="none">
-              <circle cx="18" cy="18" r="12" stroke="var(--gold)" strokeWidth="1.5" />
-              <path d="M12 18l4 4 8-8" stroke="var(--gold)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-            <div className="card-title">Molecular Purity</div>
-            <div className="card-desc">Every drop is verified for clinical purity and botanical honesty. We accept nothing less than 100% molecular integrity.</div>
+            <div className="card-title">Consumer Obsession</div>
+            <div className="card-desc">Every decision starts and ends with the person who uses our products. We study lives, not just demographics. We listen to silences as much as surveys. Our brands exist to serve real human needs with products that feel like they were made specifically for each individual.</div>
           </div>
           <div className="usp-card">
             <div className="card-num">02</div>
-            <svg className="card-icon" viewBox="0 0 36 36" fill="none">
-              <rect x="6" y="10" width="10" height="16" rx="2" stroke="var(--gold)" strokeWidth="1.5" />
-              <rect x="20" y="6" width="10" height="20" rx="2" stroke="var(--gold)" strokeWidth="1.5" />
-            </svg>
-            <div className="card-title">Clinical Rigor</div>
-            <div className="card-desc">Our formulas undergo 12 months of intense dermatological testing before they earn the Nyoraa seal of approval.</div>
+            <div className="card-title">Design as Strategy</div>
+            <div className="card-desc">We believe design is not decoration — it is the clearest expression of a brand's promise. At Nyoraa, every visual identity, every product touchpoint, every piece of communication is treated as strategic. Beautiful and purposeful are never mutually exclusive.</div>
           </div>
           <div className="usp-card">
             <div className="card-num">03</div>
-            <svg className="card-icon" viewBox="0 0 36 36" fill="none">
-              <path d="M18 6l3.09 6.26L28 13.27l-5 4.87 1.18 6.88L18 21.77l-6.18 3.25L13 18.14 8 13.27l6.91-1.01L18 6z" stroke="var(--gold)" strokeWidth="1.5" strokeLinejoin="round" />
-            </svg>
-            <div className="card-title">Traceable Sourcing</div>
-            <div className="card-desc">From seed to skin, we track every component of our supply chain to ensure ethical harvesting and sustainable growth.</div>
+            <div className="card-title">Long-term Thinking</div>
+            <div className="card-desc">We build brands that outlast us. We resist shortcuts that compromise brand equity for short-term gains. Our portfolio is not assembled for quarterly metrics — it is curated for generational relevance. We invest in trust, and we measure it in decades.</div>
           </div>
           <div className="usp-card">
             <div className="card-num">04</div>
-            <svg className="card-icon" viewBox="0 0 36 36" fill="none">
-              <path d="M8 28V16M14 28V10M20 28V20M26 28V14" stroke="var(--gold)" strokeWidth="1.5" strokeLinecap="round" />
-            </svg>
-            <div className="card-title">Ethical Extraction</div>
-            <div className="card-desc">We utilize low-temperature extraction technology to preserve the cellular vitality of our botanical actives.</div>
+            <div className="card-title">Authentic Stories</div>
+            <div className="card-desc">Every brand in our house is built on a foundation of truth. We celebrate heritage and craftsmanship, ensuring that every product tells a story of integrity, from the hands that crafted it to the lives it touches.</div>
           </div>
         </div>
 
         <div className="stats-strip">
           <div className="stat-item">
-            <div className="stat-num">8+</div>
+            <div className="stat-num">4+</div>
             <div className="stat-lbl">Child brands</div>
           </div>
           <div className="stat-item">
-            <div className="stat-num">12+</div>
+            <div className="stat-num">6+</div>
             <div className="stat-lbl">Years of trust</div>
           </div>
           <div className="stat-item">
-            <div className="stat-num">200+</div>
+            <div className="stat-num">10+</div>
             <div className="stat-lbl">Products offered</div>
           </div>
         </div>
