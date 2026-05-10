@@ -363,10 +363,13 @@ export default function AboutUs() {
                 </div>
 
                 <div className="founder-stage">
-                    {/* Dr. Aryan Kapoor */}
+                    {/* M Dinesh KUMAR */}
                     <div className="founder-card">
-                        <div className="photo-frame">
-                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1374&auto=format&fit=crop" alt="Dr. Aryan Kapoor" />
+                        <div className="photo-frame" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#1a1a1a' }}>
+                            <svg viewBox="0 0 24 24" width="80" height="80" fill="none" stroke="rgba(255,255,255,0.2)" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
                             <div className="photo-overlay"></div>
                             <div className="shimmer-bar"></div>
                             <div className="corner-accent corner-tl"></div>
@@ -378,22 +381,21 @@ export default function AboutUs() {
                         <div className="founder-info">
                             <div className="info-fill"></div>
                             <div className="founder-info-inner">
-                                <div className="founder-name">Dr. Aryan Kapoor</div>
-                                <div className="founder-title">Founder &amp; CEO</div>
+                                <div className="founder-name">M Dinesh KUMAR</div>
+                                <div className="founder-title">Founder &amp; Creative Director</div>
                                 <div className="divider-line"></div>
                                 <p className="founder-bio">
-                                    MD in Dermatology (AIIMS) &amp; MBA (ISB). Featured in Forbes India and Vogue Business as a pioneer of transparent skincare.
+                                    User Experience Design (UED), UX Research, Brand Design, Brand Marketing, Brand Consulting, Digital Marketing, Web Design, SEO, SEM, Graphic Design.
                                 </p>
                                 <div className="founder-links">
-                                    <a className="link-dot" href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z" /><rect x="2" y="9" width="4" height="12" /><circle cx="4" cy="4" r="2" fill="#888" stroke="none" /></svg></a>
-                                    <a className="link-dot" href="#" aria-label="Twitter"><svg viewBox="0 0 24 24"><path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z" /></svg></a>
+                                    <a className="link-dot" href="https://www.linkedin.com/in/dineshmux" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z" /><rect x="2" y="9" width="4" height="12" /><circle cx="4" cy="4" r="2" fill="#888" stroke="none" /></svg></a>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     {/* Meera Kapoor */}
-                    <div className="founder-card">
+                    {/* <div className="founder-card">
                         <div className="photo-frame">
                             <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1374&auto=format&fit=crop" alt="Meera Kapoor" />
                             <div className="photo-overlay"></div>
@@ -418,7 +420,7 @@ export default function AboutUs() {
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             </section>
 

@@ -21,13 +21,13 @@ const Footer = memo(() => {
               <a href="/coming-soon">Home (Soon)</a>
               <a href="/coming-soon">Partner Brands</a>
             </div>
-            <div className="footer-col">
+            {/* <div className="footer-col">
               <b>Connect</b>
               <a href="#"> Instagram</a>
               <a href="#">LinkedIn</a>
               <a href="#"> Twitter</a>
               <a href="/contacts-us">Contact Us</a>
-            </div>
+            </div> */}
             <div className="footer-col">
               <b>Corporate</b>
               <a href="/about-us">About Nyoraa</a>
