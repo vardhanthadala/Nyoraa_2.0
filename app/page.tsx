@@ -550,9 +550,8 @@ export default function Home() {
 
           {/* Right: description */}
           <p className="reveal
-            text-linen-600 font-normal leading-[1.75]
+            text-gray-500 font-normal leading-[1.75]
             sm:text-right
-            text:grey
             text-[12px]
             xs:text-[12.5px]
             sm:text-[12.5px] sm:max-w-[210px]
@@ -579,12 +578,12 @@ export default function Home() {
         ">
 
           {/* Card 1 */}
-          <div className="md:col-span-7 reveal group relative flex flex-col overflow-hidden rounded-3xl bg-[#f7f7f7] hover:bg-white p-4 sm:p-5 lg:p-6 border border-[#f0ebe3] hover:border-[#e8e0d4] transition-all duration-700 hover:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.05)] hover:-translate-y-1" style={{ transitionDelay: '0.4s' }}>
+          <div className="md:col-span-7 reveal group relative flex flex-col overflow-hidden rounded-3xl bg-[#f7f7f7] hover:bg-white p-4 sm:p-5 lg:p-6 border border-gray-200 hover:border-gray-300 transition-all duration-700 hover:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.05)] hover:-translate-y-1" style={{ transitionDelay: '0.4s' }}>
             <div className="flex justify-between items-start mb-3 sm:mb-4 lg:mb-5">
               <span className="font-mono text-xs sm:text-sm tracking-widest text-[#a89888] font-medium">01</span>
               <div className="w-12 h-12 relative group-hover:scale-110 transition-transform duration-500">
                 <motion.div
-                  className="absolute inset-0 rounded-full bg-[#f2ede5] group-hover:bg-[#e8c8b8] transition-colors duration-500"
+                  className="absolute inset-0 rounded-full bg-white group-hover:bg-[#f2ede5] transition-colors duration-500"
                   animate={{
                     scale: [1, 1.05, 1],
                     rotateY: [0, 15, 0],
@@ -593,7 +592,7 @@ export default function Home() {
                   transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
                 />
                 <motion.div
-                  className="relative z-10 w-full h-full flex items-center justify-center text-[#4a3828]"
+                  className="relative z-10 w-full h-full flex items-center justify-center text-[#1a1a1a]"
                   animate={{ z: [0, 20, 0] }}
                   transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                 >
@@ -603,8 +602,8 @@ export default function Home() {
               </div>
             </div>
             <div className="relative z-10">
-              <h3 className="text-lg sm:text-xl lg:text-2xl 2xl:text-3xl text-[#1a1a1a] mb-1 sm:mb-2 group-hover:text-[#4a3828] transition-colors duration-500 leading-tight" style={{ fontFamily: 'var(--fd)' }}>Consumer<br />Obsession</h3>
-              <p className="text-[10px] sm:text-xs lg:text-sm 2xl:text-base text-[#666666] leading-relaxed group-hover:text-[#4a3828] transition-colors duration-500 max-w-md" style={{ fontFamily: 'var(--fb)' }}>
+              <h3 className="text-lg sm:text-xl lg:text-2xl 2xl:text-3xl text-[#1a1a1a] mb-1 sm:mb-2 group-hover:text-[#1a1a1a] transition-colors duration-500 leading-tight" style={{ fontFamily: 'var(--fd)' }}>Consumer<br />Obsession</h3>
+              <p className="text-[10px] sm:text-xs lg:text-sm 2xl:text-base text-[#666666] leading-relaxed group-hover:text-[#1a1a1a] transition-colors duration-500 max-w-md" style={{ fontFamily: 'var(--fb)' }}>
                 Every decision starts and ends with the person who uses our products. We study lives, not just demographics. We listen to silences as much as surveys.
               </p>
             </div>
@@ -612,12 +611,12 @@ export default function Home() {
           </div>
 
           {/* Card 2 */}
-          <div className="md:col-span-5 reveal group relative flex flex-col overflow-hidden rounded-3xl bg-[#f7f7f7] hover:bg-white p-4 sm:p-5 lg:p-6 border border-[#f0ebe3] hover:border-[#e8e0d4] transition-all duration-700 hover:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.05)] hover:-translate-y-1" style={{ transitionDelay: '0.5s' }}>
+          <div className="md:col-span-5 reveal group relative flex flex-col overflow-hidden rounded-3xl bg-[#f7f7f7] hover:bg-white p-4 sm:p-5 lg:p-6 border border-gray-200 hover:border-gray-300 transition-all duration-700 hover:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.05)] hover:-translate-y-1" style={{ transitionDelay: '0.5s' }}>
             <div className="flex justify-between items-start mb-3 sm:mb-4 lg:mb-5">
               <span className="font-mono text-xs sm:text-sm tracking-widest text-[#a89888] font-medium">02</span>
               <div className="w-12 h-12 relative group-hover:scale-110 transition-transform duration-500">
                 <motion.div
-                  className="absolute inset-0 rounded-full bg-[#f2ede5] group-hover:bg-[#e8c8b8] transition-colors duration-500"
+                  className="absolute inset-0 rounded-full bg-white group-hover:bg-[#f2ede5] transition-colors duration-500"
                   animate={{
                     rotate: [0, 360],
                     scale: [1, 0.95, 1]
@@ -625,7 +624,7 @@ export default function Home() {
                   transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
                 />
                 <motion.div
-                  className="relative z-10 w-full h-full flex items-center justify-center text-[#4a3828]"
+                  className="relative z-10 w-full h-full flex items-center justify-center text-[#1a1a1a]"
                   animate={{ rotateY: [0, 30, 0], x: [0, 2, 0] }}
                   transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
                 >
@@ -635,8 +634,8 @@ export default function Home() {
               </div>
             </div>
             <div className="relative z-10">
-              <h3 className="text-lg sm:text-xl lg:text-2xl 2xl:text-3xl text-[#1a1a1a] mb-1 sm:mb-2 group-hover:text-[#4a3828] transition-colors duration-500 leading-tight" style={{ fontFamily: 'var(--fd)' }}>Design as<br />Strategy</h3>
-              <p className="text-[10px] sm:text-xs lg:text-sm 2xl:text-base text-[#666666] leading-relaxed group-hover:text-[#4a3828] transition-colors duration-500 max-w-xs" style={{ fontFamily: 'var(--fb)' }}>
+              <h3 className="text-lg sm:text-xl lg:text-2xl 2xl:text-3xl text-[#1a1a1a] mb-1 sm:mb-2 group-hover:text-[#1a1a1a] transition-colors duration-500 leading-tight" style={{ fontFamily: 'var(--fd)' }}>Design as<br />Strategy</h3>
+              <p className="text-[10px] sm:text-xs lg:text-sm 2xl:text-base text-[#666666] leading-relaxed group-hover:text-[#1a1a1a] transition-colors duration-500 max-w-xs" style={{ fontFamily: 'var(--fb)' }}>
                 Design is not decoration — it is the clearest expression of a brand's promise. Beautiful and purposeful are never mutually exclusive in our work.
               </p>
             </div>
@@ -644,12 +643,12 @@ export default function Home() {
           </div>
 
           {/* Card 3 */}
-          <div className="md:col-span-5 reveal group relative flex flex-col overflow-hidden rounded-3xl bg-[#f7f7f7] hover:bg-white p-4 sm:p-5 lg:p-6 border border-[#f0ebe3] hover:border-[#e8e0d4] transition-all duration-700 hover:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.05)] hover:-translate-y-1" style={{ transitionDelay: '0.6s' }}>
+          <div className="md:col-span-5 reveal group relative flex flex-col overflow-hidden rounded-3xl bg-[#f7f7f7] hover:bg-white p-4 sm:p-5 lg:p-6 border border-gray-200 hover:border-gray-300 transition-all duration-700 hover:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.05)] hover:-translate-y-1" style={{ transitionDelay: '0.6s' }}>
             <div className="flex justify-between items-start mb-3 sm:mb-4 lg:mb-5">
               <span className="font-mono text-xs sm:text-sm tracking-widest text-[#a89888] font-medium">03</span>
               <div className="w-12 h-12 relative group-hover:scale-110 transition-transform duration-500">
                 <motion.div
-                  className="absolute inset-0 rounded-full bg-[#f2ede5] group-hover:bg-[#e8c8b8] transition-colors duration-500"
+                  className="absolute inset-0 rounded-full bg-white group-hover:bg-[#f2ede5] transition-colors duration-500"
                   animate={{
                     skew: [0, 5, 0],
                     y: [0, -4, 0]
@@ -657,7 +656,7 @@ export default function Home() {
                   transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
                 />
                 <motion.div
-                  className="relative z-10 w-full h-full flex items-center justify-center text-[#4a3828]"
+                  className="relative z-10 w-full h-full flex items-center justify-center text-[#1a1a1a]"
                   animate={{ rotateX: [0, 45, 0] }}
                   transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
                 >
@@ -667,8 +666,8 @@ export default function Home() {
               </div>
             </div>
             <div className="relative z-10">
-              <h3 className="text-lg sm:text-xl lg:text-2xl 2xl:text-3xl text-[#1a1a1a] mb-1 sm:mb-2 group-hover:text-[#4a3828] transition-colors duration-500 leading-tight" style={{ fontFamily: 'var(--fd)' }}>Long-term<br />Thinking</h3>
-              <p className="text-[10px] sm:text-xs lg:text-sm 2xl:text-base text-[#666666] leading-relaxed group-hover:text-[#4a3828] transition-colors duration-500 max-w-xs" style={{ fontFamily: 'var(--fb)' }}>
+              <h3 className="text-lg sm:text-xl lg:text-2xl 2xl:text-3xl text-[#1a1a1a] mb-1 sm:mb-2 group-hover:text-[#1a1a1a] transition-colors duration-500 leading-tight" style={{ fontFamily: 'var(--fd)' }}>Long-term<br />Thinking</h3>
+              <p className="text-[10px] sm:text-xs lg:text-sm 2xl:text-base text-[#666666] leading-relaxed group-hover:text-[#1a1a1a] transition-colors duration-500 max-w-xs" style={{ fontFamily: 'var(--fb)' }}>
                 We build brands that outlast us. We resist shortcuts that compromise brand equity. Our portfolio is curated for generational relevance — we measure trust in decades.
               </p>
             </div>
@@ -676,12 +675,12 @@ export default function Home() {
           </div>
 
           {/* Card 4 */}
-          <div className="md:col-span-7 reveal group relative flex flex-col overflow-hidden rounded-3xl bg-[#f7f7f7] hover:bg-white p-4 sm:p-5 lg:p-6 border border-[#f0ebe3] hover:border-[#e8e0d4] transition-all duration-700 hover:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.05)] hover:-translate-y-1" style={{ transitionDelay: '0.7s' }}>
+          <div className="md:col-span-7 reveal group relative flex flex-col overflow-hidden rounded-3xl bg-[#f7f7f7] hover:bg-white p-4 sm:p-5 lg:p-6 border border-gray-200 hover:border-gray-300 transition-all duration-700 hover:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.05)] hover:-translate-y-1" style={{ transitionDelay: '0.7s' }}>
             <div className="flex justify-between items-start mb-3 sm:mb-4 lg:mb-5">
               <span className="font-mono text-xs sm:text-sm tracking-widest text-[#a89888] font-medium">04</span>
               <div className="w-12 h-12 relative group-hover:scale-110 transition-transform duration-500">
                 <motion.div
-                  className="absolute inset-0 rounded-full bg-[#f2ede5] group-hover:bg-[#e8c8b8] transition-colors duration-500"
+                  className="absolute inset-0 rounded-full bg-white group-hover:bg-[#f2ede5] transition-colors duration-500"
                   animate={{
                     scale: [1, 1.1, 1],
                     rotateZ: [0, 10, 0]
@@ -689,7 +688,7 @@ export default function Home() {
                   transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
                 />
                 <motion.div
-                  className="relative z-10 w-full h-full flex items-center justify-center text-[#4a3828]"
+                  className="relative z-10 w-full h-full flex items-center justify-center text-[#1a1a1a]"
                   animate={{ rotateY: [0, -30, 0], scale: [1, 1.2, 1] }}
                   transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
                 >
@@ -699,8 +698,8 @@ export default function Home() {
               </div>
             </div>
             <div className="relative z-10">
-              <h3 className="text-lg sm:text-xl lg:text-2xl 2xl:text-3xl text-[#1a1a1a] mb-1 sm:mb-2 group-hover:text-[#4a3828] transition-colors duration-500 leading-tight" style={{ fontFamily: 'var(--fd)' }}>Authentic<br />Stories</h3>
-              <p className="text-[10px] sm:text-xs lg:text-sm 2xl:text-base text-[#666666] leading-relaxed group-hover:text-[#4a3828] transition-colors duration-500 max-w-md" style={{ fontFamily: 'var(--fb)' }}>
+              <h3 className="text-lg sm:text-xl lg:text-2xl 2xl:text-3xl text-[#1a1a1a] mb-1 sm:mb-2 group-hover:text-[#1a1a1a] transition-colors duration-500 leading-tight" style={{ fontFamily: 'var(--fd)' }}>Authentic<br />Stories</h3>
+              <p className="text-[10px] sm:text-xs lg:text-sm 2xl:text-base text-[#666666] leading-relaxed group-hover:text-[#1a1a1a] transition-colors duration-500 max-w-md" style={{ fontFamily: 'var(--fb)' }}>
                 Every brand in our house is built on a foundation of truth. We celebrate heritage and craftsmanship, ensuring every product tells a story of integrity.
               </p>
             </div>
