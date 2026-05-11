@@ -4755,7 +4755,8 @@ hr.div {
   transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.reveal.in, .reveal.visible {
+.reveal.in,
+.reveal.visible {
   opacity: 1;
   transform: translateY(0);
 }
@@ -4780,7 +4781,7 @@ hr.div {
   left: -150%;
   width: 50%;
   height: 100%;
-  background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0) 100%);
+  background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.6) 50%, rgba(255, 255, 255, 0) 100%);
   transform: skewX(-25deg);
   z-index: 10;
   pointer-events: none;
@@ -4791,6 +4792,11 @@ hr.div {
 }
 
 @keyframes shine-sweep {
-  0% { left: -150%; }
-  100% { left: 200%; }
+  0% {
+    left: -150%;
+  }
+
+  100% {
+    left: 200%;
+  }
 }

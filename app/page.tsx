@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState, useMemo, useCallback } from "react";
+import { motion } from "framer-motion";
+import { Heart, Pen, TrendingUp, BookOpen } from "lucide-react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import Link from "next/link";
@@ -395,14 +397,14 @@ export default function Home() {
               botanicals for a total mind-body rejuvenation.
             </p>
             <div className="stat-row" style={{ justifyContent: "flex-end" }}>
-              <div className="stat">
+              {/* <div className="stat">
                 <span className="stat-num">100%</span>
                 <span className="stat-label">Organic</span>
               </div>
               <div className="stat">
                 <span className="stat-num">Coming</span>
                 <span className="stat-label">Soon</span>
-              </div>
+              </div> */}
             </div>
           </div>
         </section>
@@ -500,15 +502,15 @@ export default function Home() {
 
       <section className="
         w-full font-raleway bg-white
-        px-5   py-14
-        xs:px-7  xs:py-16
-        sm:px-10 sm:py-20
-        md:px-16 md:py-24
-        lg:px-24 lg:py-28
-        xl:px-32 xl:py-32
-        2xl:px-44 2xl:py-40
-        3xl:px-64 3xl:py-52
-        4xl:px-96 4xl:py-64
+        px-[5vw] py-10
+        xs:py-12
+        sm:py-14
+        md:py-16
+        lg:py-20
+        xl:py-24
+        2xl:py-28
+        3xl:py-36
+        4xl:py-44
       ">
 
         {/* ── HEADER ─────────────────────────────── */}
@@ -531,15 +533,15 @@ export default function Home() {
 
             <h2 className="
               leading-[1.04] tracking-tight
-              text-[30px]
-              xs:text-[34px]
-              sm:text-[38px]
-              md:text-[44px]
-              lg:text-[50px]
-              xl:text-[56px]
-              2xl:text-[68px]
-              3xl:text-[88px]
-              4xl:text-[108px]
+              text-[24px]
+              xs:text-[28px]
+              sm:text-[32px]
+              md:text-[36px]
+              lg:text-[42px]
+              xl:text-[48px]
+              2xl:text-[56px]
+              3xl:text-[68px]
+              4xl:text-[84px]
             ">
               <span className="block font-light   text-linen-900">The Nyoraa</span>
               <span className="block font-semibold text-linen-900">Standards</span>
@@ -550,6 +552,7 @@ export default function Home() {
           <p className="reveal
             text-linen-600 font-normal leading-[1.75]
             sm:text-right
+            text:grey
             text-[12px]
             xs:text-[12.5px]
             sm:text-[12.5px] sm:max-w-[210px]
@@ -569,138 +572,147 @@ export default function Home() {
 
         {/* ── CARDS GRID ──────────────────────────── */}
         <div className="
-          relative
-          grid grid-cols-1 sm:grid-cols-2
-          gap-4 sm:gap-6 lg:gap-8
-          border-y border-gray-200
+          grid grid-cols-1 md:grid-cols-12
+          gap-2 sm:gap-3 lg:gap-4
           py-8 sm:py-10 lg:py-12
           mb-8 sm:mb-10 lg:mb-12 2xl:mb-16 3xl:mb-20 4xl:mb-28
         ">
 
-          {/* Middle Vertical Line */}
-          <div className="hidden sm:block absolute top-0 bottom-0 left-1/2 w-px bg-gray-200 -translate-x-1/2"></div>
-
           {/* Card 1 */}
-          <div className="reveal shine-card group cursor-pointer relative
-            flex items-start gap-4 xs:gap-5 2xl:gap-6 3xl:gap-8 4xl:gap-10
-            p-6 sm:p-8 md:p-10 lg:p-12 2xl:p-14 3xl:p-18 4xl:p-24
-            rounded-2xl
-          " style={{ transitionDelay: '0.4s' }}>
-            <div className="hidden sm:block absolute bottom-0 left-6 right-6 sm:left-8 sm:right-8 md:left-10 md:right-10 lg:left-12 lg:right-12 2xl:left-14 2xl:right-14 3xl:left-18 3xl:right-18 4xl:left-24 4xl:right-24 h-px bg-gray-200"></div>
-            <span className="
-              shrink-0 font-semibold tracking-wider text-linen-400 pt-px
-              text-[10px] sm:text-[10.5px] 2xl:text-[13px] 3xl:text-base 4xl:text-xl
-              transition-all duration-300 group-hover:text-linen-900 group-hover:-translate-y-1
-            ">01</span>
-            <div>
-              <h3 className="
-                font-semibold text-linen-900 leading-snug
-                mb-2 2xl:mb-2.5 3xl:mb-3 4xl:mb-4
-                text-[13px] xs:text-[13.5px] sm:text-[13.5px] md:text-[14px] lg:text-[15px]
-                xl:text-[15.5px] 2xl:text-[18px] 3xl:text-[23px] 4xl:text-[28px]
-                transition-colors duration-300 group-hover:text-amber-800
-              ">Consumer Obsession</h3>
-              <p className="
-                text-linen-600 font-normal leading-[1.72]
-                text-[11.5px] xs:text-[12px] sm:text-[12px] md:text-[12.5px] lg:text-[13px]
-                2xl:text-[15px] 3xl:text-[19px] 4xl:text-[23px]
-                transition-colors duration-300 group-hover:text-linen-800
-              ">Every decision starts and ends with the person who uses our products. We study lives, not just demographics. We listen to silences as much as surveys.</p>
+          <div className="md:col-span-7 reveal group relative flex flex-col overflow-hidden rounded-3xl bg-[#f7f7f7] hover:bg-white p-4 sm:p-5 lg:p-6 border border-[#f0ebe3] hover:border-[#e8e0d4] transition-all duration-700 hover:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.05)] hover:-translate-y-1" style={{ transitionDelay: '0.4s' }}>
+            <div className="flex justify-between items-start mb-3 sm:mb-4 lg:mb-5">
+              <span className="font-mono text-xs sm:text-sm tracking-widest text-[#a89888] font-medium">01</span>
+              <div className="w-12 h-12 relative group-hover:scale-110 transition-transform duration-500">
+                <motion.div
+                  className="absolute inset-0 rounded-full bg-[#f2ede5] group-hover:bg-[#e8c8b8] transition-colors duration-500"
+                  animate={{
+                    scale: [1, 1.05, 1],
+                    rotateY: [0, 15, 0],
+                    rotateX: [0, -15, 0]
+                  }}
+                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                />
+                <motion.div
+                  className="relative z-10 w-full h-full flex items-center justify-center text-[#4a3828]"
+                  animate={{ z: [0, 20, 0] }}
+                  transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                >
+                  <Heart className="w-6 h-6" strokeWidth={1.5} />
+                </motion.div>
+                <div className="absolute inset-0 bg-black/5 rounded-full blur-md translate-y-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              </div>
             </div>
+            <div className="relative z-10">
+              <h3 className="text-lg sm:text-xl lg:text-2xl 2xl:text-3xl text-[#1a1a1a] mb-1 sm:mb-2 group-hover:text-[#4a3828] transition-colors duration-500 leading-tight" style={{ fontFamily: 'var(--fd)' }}>Consumer<br />Obsession</h3>
+              <p className="text-[10px] sm:text-xs lg:text-sm 2xl:text-base text-[#666666] leading-relaxed group-hover:text-[#4a3828] transition-colors duration-500 max-w-md" style={{ fontFamily: 'var(--fb)' }}>
+                Every decision starts and ends with the person who uses our products. We study lives, not just demographics. We listen to silences as much as surveys.
+              </p>
+            </div>
+            <div className="absolute -bottom-32 -right-32 w-96 h-96 bg-gradient-to-tl from-[#e8c8b8]/30 to-transparent opacity-0 group-hover:opacity-100 rounded-full blur-3xl transition-opacity duration-700 pointer-events-none"></div>
           </div>
 
           {/* Card 2 */}
-          <div className="reveal shine-card group cursor-pointer relative
-            flex items-start gap-4 xs:gap-5 2xl:gap-6 3xl:gap-8 4xl:gap-10
-            p-6 sm:p-8 md:p-10 lg:p-12 2xl:p-14 3xl:p-18 4xl:p-24
-            rounded-2xl
-          " style={{ transitionDelay: '0.5s' }}>
-            <div className="hidden sm:block absolute bottom-0 left-6 right-6 sm:left-8 sm:right-8 md:left-10 md:right-10 lg:left-12 lg:right-12 2xl:left-14 2xl:right-14 3xl:left-18 3xl:right-18 4xl:left-24 4xl:right-24 h-px bg-gray-200"></div>
-            <span className="
-              shrink-0 font-semibold tracking-wider text-linen-400 pt-px
-              text-[10px] sm:text-[10.5px] 2xl:text-[13px] 3xl:text-base 4xl:text-xl
-              transition-all duration-300 group-hover:text-linen-900 group-hover:-translate-y-1
-            ">02</span>
-            <div>
-              <h3 className="
-                font-semibold text-linen-900 leading-snug
-                mb-2 2xl:mb-2.5 3xl:mb-3 4xl:mb-4
-                text-[13px] xs:text-[13.5px] sm:text-[13.5px] md:text-[14px] lg:text-[15px]
-                xl:text-[15.5px] 2xl:text-[18px] 3xl:text-[23px] 4xl:text-[28px]
-                transition-colors duration-300 group-hover:text-amber-800
-              ">Design as Strategy</h3>
-              <p className="
-                text-linen-600 font-normal leading-[1.72]
-                text-[11.5px] xs:text-[12px] sm:text-[12px] md:text-[12.5px] lg:text-[13px]
-                2xl:text-[15px] 3xl:text-[19px] 4xl:text-[23px]
-                transition-colors duration-300 group-hover:text-linen-800
-              ">Design is not decoration — it is the clearest expression of a brand's promise. Beautiful and purposeful are never mutually exclusive in our work.</p>
+          <div className="md:col-span-5 reveal group relative flex flex-col overflow-hidden rounded-3xl bg-[#f7f7f7] hover:bg-white p-4 sm:p-5 lg:p-6 border border-[#f0ebe3] hover:border-[#e8e0d4] transition-all duration-700 hover:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.05)] hover:-translate-y-1" style={{ transitionDelay: '0.5s' }}>
+            <div className="flex justify-between items-start mb-3 sm:mb-4 lg:mb-5">
+              <span className="font-mono text-xs sm:text-sm tracking-widest text-[#a89888] font-medium">02</span>
+              <div className="w-12 h-12 relative group-hover:scale-110 transition-transform duration-500">
+                <motion.div
+                  className="absolute inset-0 rounded-full bg-[#f2ede5] group-hover:bg-[#e8c8b8] transition-colors duration-500"
+                  animate={{
+                    rotate: [0, 360],
+                    scale: [1, 0.95, 1]
+                  }}
+                  transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+                />
+                <motion.div
+                  className="relative z-10 w-full h-full flex items-center justify-center text-[#4a3828]"
+                  animate={{ rotateY: [0, 30, 0], x: [0, 2, 0] }}
+                  transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+                >
+                  <Pen className="w-6 h-6" strokeWidth={1.5} />
+                </motion.div>
+                <div className="absolute inset-0 bg-black/5 rounded-full blur-md translate-y-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              </div>
             </div>
+            <div className="relative z-10">
+              <h3 className="text-lg sm:text-xl lg:text-2xl 2xl:text-3xl text-[#1a1a1a] mb-1 sm:mb-2 group-hover:text-[#4a3828] transition-colors duration-500 leading-tight" style={{ fontFamily: 'var(--fd)' }}>Design as<br />Strategy</h3>
+              <p className="text-[10px] sm:text-xs lg:text-sm 2xl:text-base text-[#666666] leading-relaxed group-hover:text-[#4a3828] transition-colors duration-500 max-w-xs" style={{ fontFamily: 'var(--fb)' }}>
+                Design is not decoration — it is the clearest expression of a brand's promise. Beautiful and purposeful are never mutually exclusive in our work.
+              </p>
+            </div>
+            <div className="absolute -bottom-32 -right-32 w-96 h-96 bg-gradient-to-tl from-[#e8c8b8]/30 to-transparent opacity-0 group-hover:opacity-100 rounded-full blur-3xl transition-opacity duration-700 pointer-events-none"></div>
           </div>
 
           {/* Card 3 */}
-          <div className="reveal shine-card group cursor-pointer relative
-            flex items-start gap-4 xs:gap-5 2xl:gap-6 3xl:gap-8 4xl:gap-10
-            p-6 sm:p-8 md:p-10 lg:p-12 2xl:p-14 3xl:p-18 4xl:p-24
-            rounded-2xl
-          " style={{ transitionDelay: '0.6s' }}>
-            {/* Note: No bottom line needed on Card 3 because the grid container has border-b */}
-            <span className="
-              shrink-0 font-semibold tracking-wider text-linen-400 pt-px
-              text-[10px] sm:text-[10.5px] 2xl:text-[13px] 3xl:text-base 4xl:text-xl
-              transition-all duration-300 group-hover:text-linen-900 group-hover:-translate-y-1
-            ">03</span>
-            <div>
-              <h3 className="
-                font-semibold text-linen-900 leading-snug
-                mb-2 2xl:mb-2.5 3xl:mb-3 4xl:mb-4
-                text-[13px] xs:text-[13.5px] sm:text-[13.5px] md:text-[14px] lg:text-[15px]
-                xl:text-[15.5px] 2xl:text-[18px] 3xl:text-[23px] 4xl:text-[28px]
-                transition-colors duration-300 group-hover:text-amber-800
-              ">Long-term Thinking</h3>
-              <p className="
-                text-linen-600 font-normal leading-[1.72]
-                text-[11.5px] xs:text-[12px] sm:text-[12px] md:text-[12.5px] lg:text-[13px]
-                2xl:text-[15px] 3xl:text-[19px] 4xl:text-[23px]
-                transition-colors duration-300 group-hover:text-linen-800
-              ">We build brands that outlast us. We resist shortcuts that compromise brand equity. Our portfolio is curated for generational relevance — we measure trust in decades.</p>
+          <div className="md:col-span-5 reveal group relative flex flex-col overflow-hidden rounded-3xl bg-[#f7f7f7] hover:bg-white p-4 sm:p-5 lg:p-6 border border-[#f0ebe3] hover:border-[#e8e0d4] transition-all duration-700 hover:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.05)] hover:-translate-y-1" style={{ transitionDelay: '0.6s' }}>
+            <div className="flex justify-between items-start mb-3 sm:mb-4 lg:mb-5">
+              <span className="font-mono text-xs sm:text-sm tracking-widest text-[#a89888] font-medium">03</span>
+              <div className="w-12 h-12 relative group-hover:scale-110 transition-transform duration-500">
+                <motion.div
+                  className="absolute inset-0 rounded-full bg-[#f2ede5] group-hover:bg-[#e8c8b8] transition-colors duration-500"
+                  animate={{
+                    skew: [0, 5, 0],
+                    y: [0, -4, 0]
+                  }}
+                  transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                />
+                <motion.div
+                  className="relative z-10 w-full h-full flex items-center justify-center text-[#4a3828]"
+                  animate={{ rotateX: [0, 45, 0] }}
+                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                >
+                  <TrendingUp className="w-6 h-6" strokeWidth={1.5} />
+                </motion.div>
+                <div className="absolute inset-0 bg-black/5 rounded-full blur-md translate-y-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              </div>
             </div>
+            <div className="relative z-10">
+              <h3 className="text-lg sm:text-xl lg:text-2xl 2xl:text-3xl text-[#1a1a1a] mb-1 sm:mb-2 group-hover:text-[#4a3828] transition-colors duration-500 leading-tight" style={{ fontFamily: 'var(--fd)' }}>Long-term<br />Thinking</h3>
+              <p className="text-[10px] sm:text-xs lg:text-sm 2xl:text-base text-[#666666] leading-relaxed group-hover:text-[#4a3828] transition-colors duration-500 max-w-xs" style={{ fontFamily: 'var(--fb)' }}>
+                We build brands that outlast us. We resist shortcuts that compromise brand equity. Our portfolio is curated for generational relevance — we measure trust in decades.
+              </p>
+            </div>
+            <div className="absolute -bottom-32 -right-32 w-96 h-96 bg-gradient-to-tl from-[#e8c8b8]/30 to-transparent opacity-0 group-hover:opacity-100 rounded-full blur-3xl transition-opacity duration-700 pointer-events-none"></div>
           </div>
 
           {/* Card 4 */}
-          <div className="reveal shine-card group cursor-pointer relative
-            flex items-start gap-4 xs:gap-5 2xl:gap-6 3xl:gap-8 4xl:gap-10
-            p-6 sm:p-8 md:p-10 lg:p-12 2xl:p-14 3xl:p-18 4xl:p-24
-            rounded-2xl
-          " style={{ transitionDelay: '0.7s' }}>
-            <span className="
-              shrink-0 font-semibold tracking-wider text-linen-400 pt-px
-              text-[10px] sm:text-[10.5px] 2xl:text-[13px] 3xl:text-base 4xl:text-xl
-              transition-all duration-300 group-hover:text-linen-900 group-hover:-translate-y-1
-            ">04</span>
-            <div>
-              <h3 className="
-                font-semibold text-linen-900 leading-snug
-                mb-2 2xl:mb-2.5 3xl:mb-3 4xl:mb-4
-                text-[13px] xs:text-[13.5px] sm:text-[13.5px] md:text-[14px] lg:text-[15px]
-                xl:text-[15.5px] 2xl:text-[18px] 3xl:text-[23px] 4xl:text-[28px]
-                transition-colors duration-300 group-hover:text-amber-800
-              ">Authentic Stories</h3>
-              <p className="
-                text-linen-600 font-normal leading-[1.72]
-                text-[11.5px] xs:text-[12px] sm:text-[12px] md:text-[12.5px] lg:text-[13px]
-                2xl:text-[15px] 3xl:text-[19px] 4xl:text-[23px]
-                transition-colors duration-300 group-hover:text-linen-800
-              ">Every brand in our house is built on a foundation of truth. We celebrate heritage and craftsmanship, ensuring every product tells a story of integrity.</p>
+          <div className="md:col-span-7 reveal group relative flex flex-col overflow-hidden rounded-3xl bg-[#f7f7f7] hover:bg-white p-4 sm:p-5 lg:p-6 border border-[#f0ebe3] hover:border-[#e8e0d4] transition-all duration-700 hover:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.05)] hover:-translate-y-1" style={{ transitionDelay: '0.7s' }}>
+            <div className="flex justify-between items-start mb-3 sm:mb-4 lg:mb-5">
+              <span className="font-mono text-xs sm:text-sm tracking-widest text-[#a89888] font-medium">04</span>
+              <div className="w-12 h-12 relative group-hover:scale-110 transition-transform duration-500">
+                <motion.div
+                  className="absolute inset-0 rounded-full bg-[#f2ede5] group-hover:bg-[#e8c8b8] transition-colors duration-500"
+                  animate={{
+                    scale: [1, 1.1, 1],
+                    rotateZ: [0, 10, 0]
+                  }}
+                  transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                />
+                <motion.div
+                  className="relative z-10 w-full h-full flex items-center justify-center text-[#4a3828]"
+                  animate={{ rotateY: [0, -30, 0], scale: [1, 1.2, 1] }}
+                  transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
+                >
+                  <BookOpen className="w-6 h-6" strokeWidth={1.5} />
+                </motion.div>
+                <div className="absolute inset-0 bg-black/5 rounded-full blur-md translate-y-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              </div>
             </div>
+            <div className="relative z-10">
+              <h3 className="text-lg sm:text-xl lg:text-2xl 2xl:text-3xl text-[#1a1a1a] mb-1 sm:mb-2 group-hover:text-[#4a3828] transition-colors duration-500 leading-tight" style={{ fontFamily: 'var(--fd)' }}>Authentic<br />Stories</h3>
+              <p className="text-[10px] sm:text-xs lg:text-sm 2xl:text-base text-[#666666] leading-relaxed group-hover:text-[#4a3828] transition-colors duration-500 max-w-md" style={{ fontFamily: 'var(--fb)' }}>
+                Every brand in our house is built on a foundation of truth. We celebrate heritage and craftsmanship, ensuring every product tells a story of integrity.
+              </p>
+            </div>
+            <div className="absolute -bottom-32 -right-32 w-96 h-96 bg-gradient-to-tl from-[#e8c8b8]/30 to-transparent opacity-0 group-hover:opacity-100 rounded-full blur-3xl transition-opacity duration-700 pointer-events-none"></div>
           </div>
 
         </div>
 
         {/* ── STATS STRIP ────────────────────────── */}
         <div className="group cursor-pointer flex items-center divide-x divide-gray-200 border border-gray-200 rounded-2xl sm:rounded-[2rem]
-          py-8 sm:py-10 md:py-12 lg:py-14
-          px-4 sm:px-6 md:px-8 lg:px-10
+          py-4 sm:py-6 md:py-8 lg:py-10
+          px-3 sm:px-4 md:px-6 lg:px-8
           transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_0_50px_rgba(200,190,180,0.3)] hover:bg-[#faf9f7] hover:border-gray-300
         ">
 
@@ -712,52 +724,52 @@ export default function Home() {
             <p className="
               font-light text-linen-700 leading-none tracking-tight
               mb-1.5 2xl:mb-2 3xl:mb-3
-              text-[28px] xs:text-[30px] sm:text-[32px] md:text-[36px] lg:text-[40px]
-              xl:text-[44px] 2xl:text-[56px] 3xl:text-[72px] 4xl:text-[88px]
+              text-[22px] xs:text-[24px] sm:text-[26px] md:text-[30px] lg:text-[34px]
+              xl:text-[38px] 2xl:text-[48px] 3xl:text-[60px] 4xl:text-[72px]
               transition-transform duration-500 group-hover:scale-105 group-hover:text-linen-900
             "><CountUp end={4} duration={1.2} />+</p>
             <p className="
               font-medium uppercase tracking-[0.16em] text-linen-500
               text-[9px] xs:text-[9.5px] sm:text-[10px] lg:text-[10.5px]
-              2xl:text-xs 3xl:text-sm 4xl:text-base
+              2xl:text-xs 3xl:text-sm 4xl:text-base text-grey
             ">Child brands</p>
           </div>
 
           <div className="reveal
             flex-1 px-5
-            xs:px-6 sm:px-8 md:px-10 lg:px-12 xl:px-14
+            xs:px-6 sm:px-8 md:px-10 lg:px-12 xl:pr-14
             2xl:px-16 3xl:px-20 4xl:px-28
           " style={{ transitionDelay: '0.9s' }}>
             <p className="
               font-light text-linen-700 leading-none tracking-tight
               mb-1.5 2xl:mb-2 3xl:mb-3
-              text-[28px] xs:text-[30px] sm:text-[32px] md:text-[36px] lg:text-[40px]
-              xl:text-[44px] 2xl:text-[56px] 3xl:text-[72px] 4xl:text-[88px]
+              text-[22px] xs:text-[24px] sm:text-[26px] md:text-[30px] lg:text-[34px]
+              xl:text-[38px] 2xl:text-[48px] 3xl:text-[60px] 4xl:text-[72px]
               transition-transform duration-500 group-hover:scale-105 group-hover:text-linen-900
             "><CountUp end={6} duration={1.2} />+</p>
             <p className="
               font-medium uppercase tracking-[0.16em] text-linen-500
               text-[9px] xs:text-[9.5px] sm:text-[10px] lg:text-[10.5px]
-              2xl:text-xs 3xl:text-sm 4xl:text-base
+              2xl:text-xs 3xl:text-sm 4xl:text-base text:grey
             ">Years of trust</p>
           </div>
 
           <div className="reveal
             flex-1 pl-5
             xs:pl-6 sm:pl-8 md:pl-10 lg:pl-12 xl:pl-14
-            2xl:pl-16 3xl:pl-20 4xl:pl-28
+            2xl:pl-16 3xl:px-20 4xl:pl-28
           " style={{ transitionDelay: '1.0s' }}>
             <p className="
               font-light text-linen-700 leading-none tracking-tight
               mb-1.5 2xl:mb-2 3xl:mb-3
-              text-[28px] xs:text-[30px] sm:text-[32px] md:text-[36px] lg:text-[40px]
-              xl:text-[44px] 2xl:text-[56px] 3xl:text-[72px] 4xl:text-[88px]
+              text-[22px] xs:text-[24px] sm:text-[26px] md:text-[30px] lg:text-[34px]
+              xl:text-[38px] 2xl:text-[48px] 3xl:text-[60px] 4xl:text-[72px]
               transition-transform duration-500 group-hover:scale-105 group-hover:text-linen-900
             "><CountUp end={10} duration={1.2} />+</p>
             <p className="
               font-medium uppercase tracking-[0.16em] text-linen-500
               text-[9px] xs:text-[9.5px] sm:text-[10px] lg:text-[10.5px]
-              2xl:text-xs 3xl:text-sm 4xl:text-base
+              2xl:text-xs 3xl:text-sm 4xl:text-base text:grey
             ">Products offered</p>
           </div>
 
