@@ -650,7 +650,7 @@ export default function Home() {
                 <motion.div
                   className="absolute inset-0 rounded-full bg-white group-hover:bg-[#f2ede5] transition-colors duration-500"
                   animate={{
-                    skew: [0, 5, 0],
+                    skewX: [0, 5, 0],
                     y: [0, -4, 0]
                   }}
                   transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
