@@ -549,7 +549,7 @@ export default function Home() {
           </div>
 
           {/* Right: description */}
-          <p className="reveal
+          {/* <p className="reveal
             text-gray-500 font-normal leading-[1.75]
             sm:text-right
             text-[12px]
@@ -563,11 +563,11 @@ export default function Home() {
             4xl:text-[24px]  4xl:max-w-[520px]
           " style={{ transitionDelay: '0.2s' }}>
             Clinical purity is not a marketing term—it is a molecular mandate. We bridge the gap between raw botanical power and surgical precision.
-          </p>
+          </p> */}
         </div>
 
         {/* Top rule */}
-        <div className="w-full h-px bg-gray-200 reveal" style={{ transitionDelay: '0.3s' }}></div>
+        {/* <div className="w-full h-px bg-gray-200 reveal" style={{ transitionDelay: '0.3s' }}></div> */}
 
         {/* ── CARDS GRID ──────────────────────────── */}
         <div className="
@@ -774,6 +774,7 @@ export default function Home() {
 
         </div>
       </section>
+        <div className="w-full h-px bg-gray-200 reveal" style={{ transitionDelay: '0.3s' }}></div>
 
       <Footer />
     </main>

@@ -28,7 +28,7 @@ const Footer = memo(() => {
               <a href="#"> Twitter</a>
               <a href="/contacts-us">Contact Us</a>
             </div> */}
-            <div className="footer-col">
+            <div className="footer-col mb-8">
               <b>Corporate</b>
               <a href="/about-us">About Nyoraa</a>
               <a href="/coming-soon">Careers</a>
@@ -38,7 +38,7 @@ const Footer = memo(() => {
           </div>
           <div className="footer-bottom">
             <div className="ft-brand-wrap">
-              <div className="ft-brand" style={{ display: 'flex', justifyContent: 'center', marginBottom: '0.5rem' }}>
+              <div className="ft-brand " style={{ display: 'flex', justifyContent: 'center', marginBottom: '0.5rem' }}>
                 <Image src="/logo.png" alt="Nyoraa Logo" width={220} height={55} style={{ objectFit: 'contain' }} />
               </div>
               <p>©2026 Nyoraa Consumers Pvt Ltd. All rights reserved.</p>
