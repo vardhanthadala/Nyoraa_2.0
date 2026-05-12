@@ -370,7 +370,7 @@ nav {
   left: 0;
   right: 0;
   z-index: 1000;
-  padding: 1.35rem 5vw;
+  padding: 1.25rem 5vw;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -430,6 +430,40 @@ nav.nav-hidden {
 
 .nav-links a:hover::after {
   width: 100%
+}
+
+@media (min-width: 768px) {
+  nav {
+    padding: 1.40625rem 5vw;
+  }
+}
+
+@media (min-width: 1024px) {
+  nav {
+    padding: 1.5625rem 5vw;
+  }
+}
+
+@media (min-width: 1440px) {
+  nav {
+    padding: 1.875rem 5vw;
+  }
+}
+
+@media (min-width: 2560px) {
+  nav {
+    padding: 2.8rem 5vw;
+  }
+  .nav-logo {
+    max-width: 340px;
+    height: 75px;
+  }
+  .nav-links {
+    gap: 5rem;
+  }
+  .nav-links a {
+    font-size: 1.6rem;
+  }
 }
 
 /* HAMBURGER */
@@ -589,8 +623,50 @@ nav.nav-hidden {
   font-family: var(--font-mono);
 }
 
+@media (min-width: 1440px) {
+  #scroll_container .text-card {
+    max-width: 38rem;
+  }
+}
+
+@media (min-width: 1920px) {
+  #scroll_container .text-card {
+    max-width: 44rem;
+  }
+}
+
+@media (min-width: 2560px) {
+  #scroll_container .text-card {
+    max-width: 90rem;
+    padding: 6rem 5rem;
+    min-height: 45rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start; /* Prevent button stretching */
+  }
+}
+
 #s0 .text-card {
   max-width: 35rem;
+}
+
+@media (min-width: 1440px) {
+  #s0 .text-card {
+    max-width: 44rem;
+  }
+}
+
+@media (min-width: 1920px) {
+  #s0 .text-card {
+    max-width: 52rem;
+  }
+}
+
+@media (min-width: 2560px) {
+  #s0 .text-card {
+    max-width: 105rem;
+  }
 }
 
 :root[data-theme="dark"] #scroll_container .text-card {
@@ -608,12 +684,46 @@ nav.nav-hidden {
   text-align: right;
 }
 
+@media (min-width: 2560px) {
+  #scroll_container .text-card.right {
+    align-items: flex-end;
+  }
+}
+
 #scroll_container .text-card.center {
   margin-inline: auto;
   border-left: none;
   border-top: var(--hairline) solid var(--card-border-sea);
   text-align: center;
   max-width: 32rem;
+}
+
+@media (min-width: 1440px) {
+  #scroll_container .text-card.center {
+    max-width: 40rem;
+  }
+}
+
+@media (min-width: 1920px) {
+  #scroll_container .text-card.center {
+    max-width: 46rem;
+  }
+}
+
+@media (min-width: 2560px) {
+  #scroll_container .text-card.center {
+    max-width: 95rem;
+    align-items: center;
+  }
+}
+
+@media (min-width: 2560px) {
+  #scroll_container h1 { font-size: 6.5rem; }
+  #scroll_container h2 { font-size: 5.5rem; }
+  #scroll_container .body-text { font-size: 1.5rem; max-width: 70rem; }
+  #scroll_container .tag { font-size: 1.3rem; margin-block-end: 2rem; }
+  #scroll_container .cta { padding: 1.5rem 3rem; font-size: 1.1rem; width: fit-content; }
+  #scroll_container .h-line { width: 10rem; margin-block-end: 3rem; }
 }
 
 #scroll_container .tag {
@@ -1312,7 +1422,7 @@ footer {
 
 @media (max-width: 48em) {
   nav {
-    padding: 1rem 1.5rem;
+    padding: 1.25rem 1.5rem;
   }
 
   .nav-links {
@@ -2146,12 +2256,13 @@ footer {
 }
 
 .footer-col a:hover {
-  color: var(--gold);
+  color: #c89e4c;
 }
 
 .footer-bottom {
   border-top: 1px solid rgba(0, 0, 0, 0.05);
-  padding-top: 0.75rem;
+  padding-top: 3.5rem;
+  padding-bottom: 3rem;
   display: flex;
   justify-content: center;
   text-align: center;
